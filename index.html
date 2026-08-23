@@ -666,6 +666,7 @@
     <p class="empty-filter" id="emptyFilter">No items match this filter.</p>
     <p class="footer-hint">Progress saves automatically on this device.</p>
   </div>
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden>All packed — safe travels!</div>
 
   <script>
     /**
@@ -826,6 +827,9 @@
       var progressFill = document.getElementById("progressFill");
       var progressBar = document.getElementById("progressBar");
       var emptyFilter = document.getElementById("emptyFilter");
+      var toastEl = document.getElementById("toast");
+      var toastTimer = null;
+      var celebrated = false;
 
       // ----- Helpers -----
 
@@ -1041,6 +1045,29 @@
         progressPct.textContent = pct + "%";
         progressFill.style.width = pct + "%";
         progressBar.setAttribute("aria-valuenow", String(pct));
+
+        if (total > 0 && packed === total) {
+          if (!celebrated) {
+            celebrated = true;
+            showToast("All packed — safe travels!");
+          }
+        } else {
+          celebrated = false;
+        }
+      }
+
+      function showToast(message) {
+        if (!toastEl) return;
+        toastEl.textContent = message;
+        toastEl.hidden = false;
+        // Force reflow so the transition plays
+        void toastEl.offsetWidth;
+        toastEl.classList.add("show");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(function () {
+          toastEl.classList.remove("show");
+          setTimeout(function () { toastEl.hidden = true; }, 350);
+        }, 2800);
       }
 
       /** Apply filter without full re-render (keeps open/closed & input focus). */
