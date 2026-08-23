@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#1F5E4A" />
+  <meta name="description" content="Saudi Trip — Business + Umrah Packing List" />
+  <title>Saudi Trip — Business + Umrah Packing List</title>
+  <style>
+    /* ========== Design tokens ========== */
+    :root {
+      --bg: #FAF7F2;
+      --bg-elevated: #FFFFFF;
+      --bg-muted: #F0EBE3;
+      --text: #2B2B2B;
+      --text-muted: #6B6560;
+      --accent: #1F5E4A;
+      --accent-hover: #174A3A;
+      --accent-soft: rgba(31, 94, 74, 0.12);
+      --border: #E4DDD3;
+      --danger: #A63D3D;
+      --danger-soft: rgba(166, 61, 61, 0.1);
+      --shadow-soft: 0 1px 2px rgba(43, 43, 43, 0.04);
+      --radius: 14px;
+      --radius-sm: 10px;
+      --header-h: auto;
+      --tap: 44px;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      --font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #141210;
+        --bg-elevated: #1E1C19;
+        --bg-muted: #2A2723;
+        --text: #F2EDE6;
+        --text-muted: #A39B91;
+        --accent: #3D9B7A;
+        --accent-hover: #4FB08C;
+        --accent-soft: rgba(61, 155, 122, 0.18);
+        --border: #3A3530;
+        --danger: #E07A7A;
+        --danger-soft: rgba(224, 122, 122, 0.15);
+        --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.25);
+      }
+    }
+
+    /* ========== Base ========== */
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font);
+      background:
+        radial-gradient(1200px 600px at 10% -10%, rgba(31, 94, 74, 0.08), transparent 55%),
+        radial-gradient(900px 500px at 100% 0%, rgba(196, 149, 90, 0.1), transparent 50%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.45;
+      min-height: 100dvh;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      body {
+        background:
+          radial-gradient(1000px 500px at 15% -15%, rgba(61, 155, 122, 0.12), transparent 55%),
+          radial-gradient(800px 400px at 100% 0%, rgba(196, 149, 90, 0.06), transparent 50%),
+          var(--bg);
+      }
+    }
+
+    button, input { font: inherit; color: inherit; }
+
+    /* ========== Layout ========== */
+    .app {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 0 16px 96px;
+    }
+
+    /* ========== Sticky header ========== */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      margin: 0 -16px;
+      padding: 16px 16px 14px;
+      background: color-mix(in srgb, var(--bg) 88%, transparent);
+      backdrop-filter: blur(14px) saturate(1.2);
+      -webkit-backdrop-filter: blur(14px) saturate(1.2);
+      border-bottom: 1px solid var(--border);
+      animation: headerIn 0.55s var(--ease) both;
+    }
+
+    @keyframes headerIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    .header-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .brand {
+      min-width: 0;
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: clamp(1.15rem, 4.2vw, 1.45rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+    }
+
+    .weather-note {
+      margin: 6px 0 0;
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      max-width: 42ch;
+    }
+
+    .btn-reset {
+      flex-shrink: 0;
+      min-height: var(--tap);
+      padding: 0 14px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--bg-elevated);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: background 0.2s var(--ease), color 0.2s var(--ease), border-color 0.2s var(--ease), transform 0.15s var(--ease);
+    }
+
+    .btn-reset:hover {
+      color: var(--danger);
+      border-color: color-mix(in srgb, var(--danger) 40%, var(--border));
+      background: var(--danger-soft);
+    }
+
+    .btn-reset:active { transform: scale(0.97); }
+
+    .btn-reset:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    /* Progress */
+    .progress-block {
+      margin-top: 4px;
+    }
+
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 8px;
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+
+    .progress-meta .pct {
+      color: var(--accent);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .progress-track {
+      height: 10px;
+      border-radius: 999px;
+      background: var(--bg-muted);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--accent), color-mix(in srgb, var(--accent) 70%, #7BC4A4));
+      transition: width 0.45s var(--ease);
+      position: relative;
+    }
+
+    .progress-fill::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.28) 50%, transparent 70%);
+      background-size: 200% 100%;
+      animation: sheen 2.8s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes sheen {
+      0%, 100% { background-position: 120% 0; }
+      50% { background-position: -20% 0; }
+    }
+
+    /* ========== Toolbar ========== */
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+      margin: 18px 0 8px;
+      animation: riseIn 0.5s var(--ease) 0.08s both;
+    }
+
+    @keyframes riseIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    .filters {
+      display: inline-flex;
+      padding: 4px;
+      border-radius: 999px;
+      background: var(--bg-muted);
+      border: 1px solid var(--border);
+      gap: 2px;
+    }
+
+    .filter-btn {
+      min-height: 40px;
+      padding: 0 14px;
+      border: none;
+      border-radius: 999px;
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.8125rem;
+      transition: background 0.2s var(--ease), color 0.2s var(--ease), transform 0.15s var(--ease);
+    }
+
+    .filter-btn:hover { color: var(--text); }
+
+    .filter-btn[aria-pressed="true"] {
+      background: var(--bg-elevated);
+      color: var(--accent);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .filter-btn:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .filter-btn:active { transform: scale(0.97); }
+
+    /* ========== Categories ========== */
+    #list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .category {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+      animation: riseIn 0.55s var(--ease) both;
+      transition: border-color 0.25s var(--ease), transform 0.25s var(--ease);
+    }
+
+    .category:nth-child(1) { animation-delay: 0.05s; }
+    .category:nth-child(2) { animation-delay: 0.1s; }
+    .category:nth-child(3) { animation-delay: 0.15s; }
+    .category:nth-child(4) { animation-delay: 0.2s; }
+    .category:nth-child(5) { animation-delay: 0.25s; }
+    .category:nth-child(6) { animation-delay: 0.3s; }
+
+    .category[open] {
+      border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
+    }
+
+    .category summary {
+      list-style: none;
+      cursor: pointer;
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      align-items: center;
+      gap: 10px;
+      min-height: var(--tap);
+      padding: 14px 16px;
+      user-select: none;
+      transition: background 0.2s var(--ease);
+    }
+
+    .category summary::-webkit-details-marker { display: none; }
+
+    .category summary:hover { background: var(--accent-soft); }
+
+    .category summary:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: -2px;
+    }
+
+    .cat-title {
+      font-weight: 700;
+      font-size: 0.98rem;
+      letter-spacing: -0.01em;
+    }
+
+    .cat-count {
+      font-size: 0.8125rem;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      color: var(--accent);
+      background: var(--accent-soft);
+      padding: 4px 10px;
+      border-radius: 999px;
+      min-width: 3.2rem;
+      text-align: center;
+    }
+
+    .chevron {
+      width: 20px;
+      height: 20px;
+      color: var(--text-muted);
+      transition: transform 0.3s var(--ease);
+    }
+
+    .category[open] .chevron { transform: rotate(180deg); }
+
+    .cat-note {
+      margin: 0;
+      padding: 0 16px 12px;
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cat-body {
+      padding: 4px 8px 10px;
+    }
+
+    /* ========== Items ========== */
+    .item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-height: var(--tap);
+      padding: 8px 10px;
+      margin: 2px 0;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: background 0.2s var(--ease), opacity 0.3s var(--ease), transform 0.2s var(--ease);
+      animation: itemIn 0.35s var(--ease) both;
+    }
+
+    @keyframes itemIn {
+      from { opacity: 0; transform: translateX(-6px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    .item:hover { background: var(--bg-muted); }
+
+    .item.is-checked {
+      opacity: 0.55;
+    }
+
+    .item.is-checked .item-label {
+      text-decoration: line-through;
+      text-decoration-thickness: 1.5px;
+      text-decoration-color: color-mix(in srgb, var(--text-muted) 70%, transparent);
+    }
+
+    .item.is-hidden { display: none; }
+
+    /* Custom checkbox */
+    .item input[type="checkbox"] {
+      position: absolute;
+      opacity: 0;
+      width: 1px;
+      height: 1px;
+      margin: 0;
+      pointer-events: none;
+    }
+
+    .box {
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      border-radius: 7px;
+      border: 2px solid color-mix(in srgb, var(--accent) 55%, var(--border));
+      background: var(--bg-elevated);
+      display: grid;
+      place-items: center;
+      transition: background 0.2s var(--ease), border-color 0.2s var(--ease), transform 0.2s var(--ease);
+    }
+
+    .box svg {
+      width: 14px;
+      height: 14px;
+      opacity: 0;
+      transform: scale(0.5);
+      transition: opacity 0.2s var(--ease), transform 0.25s var(--ease);
+      color: #fff;
+    }
+
+    .item input:checked + .box {
+      background: var(--accent);
+      border-color: var(--accent);
+      transform: scale(1.05);
+    }
+
+    .item input:checked + .box svg {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .item input:focus-visible + .box {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .item-label {
+      flex: 1;
+      min-width: 0;
+      font-size: 0.9375rem;
+      transition: opacity 0.25s var(--ease), text-decoration-color 0.25s var(--ease);
+    }
+
+    .btn-delete {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      border: none;
+      border-radius: 10px;
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 1.25rem;
+      line-height: 1;
+      display: grid;
+      place-items: center;
+      transition: background 0.2s var(--ease), color 0.2s var(--ease), transform 0.15s var(--ease);
+    }
+
+    .btn-delete:hover {
+      background: var(--danger-soft);
+      color: var(--danger);
+    }
+
+    .btn-delete:active { transform: scale(0.92); }
+
+    .btn-delete:focus-visible {
+      outline: 2px solid var(--danger);
+      outline-offset: 2px;
+    }
+
+    /* ========== Add custom item ========== */
+    .add-row {
+      display: flex;
+      gap: 8px;
+      padding: 8px 8px 4px;
+      margin-top: 4px;
+    }
+
+    .add-row input[type="text"] {
+      flex: 1;
+      min-height: var(--tap);
+      padding: 0 14px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--bg);
+      transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
+    }
+
+    .add-row input[type="text"]::placeholder { color: var(--text-muted); }
+
+    .add-row input[type="text"]:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-soft);
+    }
+
+    .btn-add {
+      flex-shrink: 0;
+      min-height: var(--tap);
+      min-width: var(--tap);
+      padding: 0 16px;
+      border: none;
+      border-radius: var(--radius-sm);
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s var(--ease), transform 0.15s var(--ease);
+    }
+
+    .btn-add:hover { background: var(--accent-hover); }
+    .btn-add:active { transform: scale(0.97); }
+
+    .btn-add:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .empty-filter {
+      text-align: center;
+      padding: 28px 16px;
+      color: var(--text-muted);
+      font-size: 0.9375rem;
+      display: none;
+    }
+
+    .empty-filter.visible { display: block; animation: riseIn 0.35s var(--ease); }
+
+    .footer-hint {
+      margin-top: 28px;
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      opacity: 0.8;
+    }
+
+    /* Completion toast */
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 28px;
+      transform: translateX(-50%) translateY(20px);
+      z-index: 60;
+      max-width: min(92vw, 360px);
+      padding: 14px 18px;
+      border-radius: 14px;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 650;
+      font-size: 0.9rem;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(31, 94, 74, 0.35);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .toast {
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+      }
+    }
+
+    /* ========== Reduced motion ========== */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* ========== Print ========== */
+    @media print {
+      body {
+        background: #fff;
+        color: #000;
+      }
+
+      .header {
+        position: static;
+        background: none;
+        border: none;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+      }
+
+      .btn-reset,
+      .toolbar,
+      .add-row,
+      .btn-delete,
+      .footer-hint,
+      .chevron {
+        display: none !important;
+      }
+
+      .category {
+        break-inside: avoid;
+        box-shadow: none;
+        border-color: #ccc;
+      }
+
+      .category:not([open]) > *:not(summary) {
+        display: block !important;
+      }
+
+      .category {
+        open: true;
+      }
+
+      .cat-body { display: block !important; }
+      .cat-note { display: block !important; }
+
+      details.category {
+        display: block;
+      }
+
+      details.category > summary ~ * {
+        display: block !important;
+      }
+
+      details.category[open] > summary ~ *,
+      details.category:not([open]) > summary ~ * {
+        display: block !important;
+        height: auto !important;
+        overflow: visible !important;
+      }
+
+      .progress-fill::after { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app" id="app">
+    <header class="header">
+      <div class="header-top">
+        <div class="brand">
+          <h1>Saudi Trip — Business + Umrah Packing List</h1>
+          <p class="weather-note">August in Saudi: 40–48°C. Pack light fabrics and hydrate.</p>
+        </div>
+        <button type="button" class="btn-reset" id="resetBtn" data-action="reset">Reset all</button>
+      </div>
+      <div class="progress-block" aria-live="polite">
+        <div class="progress-meta">
+          <span id="progressText">0 of 0 packed</span>
+          <span class="pct" id="progressPct">0%</span>
+        </div>
+        <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progressBar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+    </header>
+
+    <div class="toolbar">
+      <div class="filters" role="group" aria-label="Filter items">
+        <button type="button" class="filter-btn" data-filter="all" aria-pressed="true">All</button>
+        <button type="button" class="filter-btn" data-filter="remaining" aria-pressed="false">Remaining</button>
+        <button type="button" class="filter-btn" data-filter="packed" aria-pressed="false">Packed</button>
+      </div>
+    </div>
+
+    <div id="list"></div>
+    <p class="empty-filter" id="emptyFilter">No items match this filter.</p>
+    <p class="footer-hint">Progress saves automatically on this device.</p>
+  </div>
+
+  <script>
+    /**
+     * Saudi Trip packing checklist
+     * - Stable slug IDs from category + label
+     * - Checked state in localStorage key `saudi-packing-v1`
+     * - Custom items in `saudi-packing-custom-v1`
+     * - Single event-delegation listener on #app
+     */
+
+    (function () {
+      "use strict";
+
+      // ----- Constants -----
+      var STORAGE_KEY = "saudi-packing-v1";
+      var CUSTOM_KEY = "saudi-packing-custom-v1";
+
+      /** Built-in packing catalogue */
+      var CATEGORIES = [
+        {
+          id: "documents-admin",
+          title: "Documents & Admin",
+          items: [
+            "Passport (6+ months validity)",
+            "Visa / Nusuk permit printout",
+            "MenACWY vaccination certificate",
+            "Flight confirmations",
+            "Hotel bookings",
+            "Travel insurance",
+            "Business cards",
+            "Company invitation letter",
+            "SAR cash",
+            "International debit/credit card",
+            "Photocopies of all documents"
+          ]
+        },
+        {
+          id: "ihram-umrah",
+          title: "Ihram & Umrah",
+          note: "Scented products break ihram — check every label.",
+          items: [
+            "Ihram set #1",
+            "Ihram set #2 (spare)",
+            "Ihram belt with pouch",
+            "Seamless sandals",
+            "Unscented soap",
+            "Unscented shampoo",
+            "Unscented toothpaste",
+            "Unscented deodorant",
+            "Unscented sunscreen",
+            "Unscented lip balm",
+            "Small prayer mat",
+            "Dua / Umrah guide book",
+            "Tasbeeh",
+            "Drawstring shoe bag for the Haram",
+            "Foldable umbrella",
+            "Water spray bottle",
+            "Collapsible water bottle",
+            "Nail clippers",
+            "Razor or scissors for halq/taqsir"
+          ]
+        },
+        {
+          id: "business",
+          title: "Business",
+          items: [
+            "Suit or blazer",
+            "Formal shirts",
+            "Formal trousers",
+            "Tie",
+            "Belt",
+            "Dress shoes",
+            "Laptop",
+            "Laptop charger",
+            "Phone",
+            "Phone charger",
+            "Power bank",
+            "Presentation materials",
+            "Type G plug adapter",
+            "Notebook",
+            "Pens",
+            "Document folder"
+          ]
+        },
+        {
+          id: "clothing",
+          title: "Clothing",
+          items: [
+            "Loose cotton shirts (long sleeve)",
+            "Long trousers",
+            "Underwear",
+            "Socks",
+            "Light jacket or shawl for A/C",
+            "Walking shoes",
+            "Second pair of walking shoes",
+            "Flip-flops for hotel",
+            "Modest loose clothing / abaya",
+            "Headscarves"
+          ]
+        },
+        {
+          id: "health-kit",
+          title: "Health Kit",
+          items: [
+            "Prescription meds in original packaging",
+            "Copy of prescription",
+            "Oral rehydration salts",
+            "Painkillers",
+            "Anti-diarrhoeal",
+            "Throat lozenges",
+            "Antihistamine",
+            "Blister plasters",
+            "Vaseline for chafing",
+            "Antiseptic cream",
+            "Hand sanitiser",
+            "Face masks"
+          ]
+        },
+        {
+          id: "practical",
+          title: "Practical",
+          items: [
+            "Universal adapter",
+            "Extension lead",
+            "Small backpack for the Haram",
+            "Sunglasses",
+            "Cap",
+            "Laundry bag",
+            "Zip-lock bags",
+            "Travel towel",
+            "Eye mask",
+            "Earplugs"
+          ]
+        }
+      ];
+
+      // Checkmark SVG reused for every custom checkbox face
+      var CHECK_SVG =
+        '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">' +
+        '<path fill="currentColor" d="M9.2 16.6 4.8 12.2l1.4-1.4 3 3 8-8 1.4 1.4z"/>' +
+        "</svg>";
+
+      var CHEVRON_SVG =
+        '<svg class="chevron" viewBox="0 0 24 24" aria-hidden="true" focusable="false">' +
+        '<path fill="currentColor" d="M7.4 9.4 12 14l4.6-4.6L18 10.8l-6 6-6-6z"/>' +
+        "</svg>";
+
+      // ----- State -----
+      var checkedMap = loadChecked();
+      var customMap = loadCustom();
+      var currentFilter = "all"; // all | remaining | packed
+
+      // ----- DOM refs -----
+      var appEl = document.getElementById("app");
+      var listEl = document.getElementById("list");
+      var progressText = document.getElementById("progressText");
+      var progressPct = document.getElementById("progressPct");
+      var progressFill = document.getElementById("progressFill");
+      var progressBar = document.getElementById("progressBar");
+      var emptyFilter = document.getElementById("emptyFilter");
+
+      // ----- Helpers -----
+
+      /** Slugify text for stable IDs that survive reordering. */
+      function slugify(text) {
+        return String(text)
+          .toLowerCase()
+          .normalize("NFKD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .replace(/&/g, "and")
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/^-+|-+$/g, "");
+      }
+
+      /** Stable item id: categorySlug + itemSlug */
+      function itemId(categoryId, label) {
+        return categoryId + "__" + slugify(label);
+      }
+
+      function loadChecked() {
+        try {
+          var raw = localStorage.getItem(STORAGE_KEY);
+          if (!raw) return {};
+          var parsed = JSON.parse(raw);
+          return parsed && typeof parsed === "object" ? parsed : {};
+        } catch (e) {
+          return {};
+        }
+      }
+
+      function saveChecked() {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(checkedMap));
+      }
+
+      function loadCustom() {
+        try {
+          var raw = localStorage.getItem(CUSTOM_KEY);
+          if (!raw) return {};
+          var parsed = JSON.parse(raw);
+          return parsed && typeof parsed === "object" ? parsed : {};
+        } catch (e) {
+          return {};
+        }
+      }
+
+      function saveCustom() {
+        localStorage.setItem(CUSTOM_KEY, JSON.stringify(customMap));
+      }
+
+      function escapeHtml(str) {
+        return String(str)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+      }
+
+      /** Collect every item (built-in + custom) for a category. */
+      function getCategoryItems(cat) {
+        var builtIn = cat.items.map(function (label) {
+          return {
+            id: itemId(cat.id, label),
+            label: label,
+            custom: false
+          };
+        });
+        var customs = (customMap[cat.id] || []).map(function (entry) {
+          return {
+            id: entry.id,
+            label: entry.label,
+            custom: true
+          };
+        });
+        return builtIn.concat(customs);
+      }
+
+      function itemMatchesFilter(isChecked) {
+        if (currentFilter === "remaining") return !isChecked;
+        if (currentFilter === "packed") return isChecked;
+        return true;
+      }
+
+      // ----- Render -----
+
+      function renderItem(item, isChecked) {
+        var hidden = itemMatchesFilter(isChecked) ? "" : " is-hidden";
+        var checkedClass = isChecked ? " is-checked" : "";
+        var checkedAttr = isChecked ? " checked" : "";
+        var deleteBtn = item.custom
+          ? '<button type="button" class="btn-delete" data-action="delete" data-id="' +
+            escapeHtml(item.id) +
+            '" aria-label="Delete ' +
+            escapeHtml(item.label) +
+            '">×</button>'
+          : "";
+
+        return (
+          '<div class="item' +
+          checkedClass +
+          hidden +
+          '" data-id="' +
+          escapeHtml(item.id) +
+          '" data-action="toggle">' +
+          '<input type="checkbox" id="' +
+          escapeHtml(item.id) +
+          '"' +
+          checkedAttr +
+          ' tabindex="0" />' +
+          '<span class="box" aria-hidden="true">' +
+          CHECK_SVG +
+          "</span>" +
+          '<label class="item-label" for="' +
+          escapeHtml(item.id) +
+          '">' +
+          escapeHtml(item.label) +
+          "</label>" +
+          deleteBtn +
+          "</div>"
+        );
+      }
+
+      function renderCategory(cat, index) {
+        var items = getCategoryItems(cat);
+        var packed = 0;
+        items.forEach(function (it) {
+          if (checkedMap[it.id]) packed += 1;
+        });
+
+        var visibleCount = 0;
+        var itemsHtml = items
+          .map(function (it) {
+            var on = !!checkedMap[it.id];
+            if (itemMatchesFilter(on)) visibleCount += 1;
+            return renderItem(it, on);
+          })
+          .join("");
+
+        // Hide whole section when filter yields no rows
+        var sectionHidden = visibleCount === 0 && currentFilter !== "all" ? ' style="display:none"' : "";
+
+        var noteHtml = cat.note
+          ? '<p class="cat-note">' + escapeHtml(cat.note) + "</p>"
+          : "";
+
+        return (
+          '<details class="category" data-cat="' +
+          escapeHtml(cat.id) +
+          '" open' +
+          sectionHidden +
+          ">" +
+          "<summary>" +
+          '<span class="cat-title">' +
+          escapeHtml(cat.title) +
+          "</span>" +
+          '<span class="cat-count" data-cat-count="' +
+          escapeHtml(cat.id) +
+          '">' +
+          packed +
+          "/" +
+          items.length +
+          "</span>" +
+          CHEVRON_SVG +
+          "</summary>" +
+          noteHtml +
+          '<div class="cat-body" data-items="' +
+          escapeHtml(cat.id) +
+          '">' +
+          itemsHtml +
+          "</div>" +
+          '<form class="add-row" data-action="add" data-cat="' +
+          escapeHtml(cat.id) +
+          '">' +
+          '<input type="text" name="label" placeholder="Add custom item…" maxlength="120" autocomplete="off" />' +
+          '<button type="submit" class="btn-add" aria-label="Add item to ' +
+          escapeHtml(cat.title) +
+          '">Add</button>' +
+          "</form>" +
+          "</details>"
+        );
+      }
+
+      function renderAll() {
+        listEl.innerHTML = CATEGORIES.map(renderCategory).join("");
+        updateProgress();
+        updateEmptyState();
+      }
+
+      function updateEmptyState() {
+        var anyVisible = listEl.querySelector(".item:not(.is-hidden)");
+        emptyFilter.classList.toggle("visible", !anyVisible && currentFilter !== "all");
+      }
+
+      function updateProgress() {
+        var total = 0;
+        var packed = 0;
+
+        CATEGORIES.forEach(function (cat) {
+          var items = getCategoryItems(cat);
+          var catPacked = 0;
+          items.forEach(function (it) {
+            total += 1;
+            if (checkedMap[it.id]) {
+              packed += 1;
+              catPacked += 1;
+            }
+          });
+          var countEl = listEl.querySelector('[data-cat-count="' + cat.id + '"]');
+          if (countEl) countEl.textContent = catPacked + "/" + items.length;
+        });
+
+        var pct = total === 0 ? 0 : Math.round((packed / total) * 100);
+        progressText.textContent = packed + " of " + total + " packed";
+        progressPct.textContent = pct + "%";
+        progressFill.style.width = pct + "%";
+        progressBar.setAttribute("aria-valuenow", String(pct));
+      }
+
+      /** Apply filter without full re-render (keeps open/closed & input focus). */
+      function applyFilter() {
+        CATEGORIES.forEach(function (cat) {
+          var section = listEl.querySelector('.category[data-cat="' + cat.id + '"]');
+          if (!section) return;
+          var visible = 0;
+          section.querySelectorAll(".item").forEach(function (row) {
+            var id = row.getAttribute("data-id");
+            var on = !!checkedMap[id];
+            var show = itemMatchesFilter(on);
+            row.classList.toggle("is-hidden", !show);
+            if (show) visible += 1;
+          });
+          section.style.display = visible === 0 && currentFilter !== "all" ? "none" : "";
+        });
+        updateEmptyState();
+      }
+
+      function setFilter(next) {
+        currentFilter = next;
+        document.querySelectorAll(".filter-btn").forEach(function (btn) {
+          btn.setAttribute("aria-pressed", btn.getAttribute("data-filter") === next ? "true" : "false");
+        });
+        applyFilter();
+      }
+
+      function toggleItem(id) {
+        checkedMap[id] = !checkedMap[id];
+        saveChecked();
+
+        var row = listEl.querySelector('.item[data-id="' + cssEscape(id) + '"]');
+        if (row) {
+          var input = row.querySelector('input[type="checkbox"]');
+          var on = !!checkedMap[id];
+          if (input) input.checked = on;
+          row.classList.toggle("is-checked", on);
+          // Re-evaluate visibility under current filter
+          var show = itemMatchesFilter(on);
+          row.classList.toggle("is-hidden", !show);
+          var section = row.closest(".category");
+          if (section && currentFilter !== "all") {
+            var any = section.querySelector(".item:not(.is-hidden)");
+            section.style.display = any ? "" : "none";
+          }
+        }
+        updateProgress();
+        updateEmptyState();
+      }
+
+      /** Minimal CSS.escape polyfill for attribute selectors */
+      function cssEscape(value) {
+        if (window.CSS && typeof CSS.escape === "function") return CSS.escape(value);
+        return String(value).replace(/[^a-zA-Z0-9_-]/g, "\\$&");
+      }
+
+      function addCustomItem(categoryId, label) {
+        label = String(label || "").trim();
+        if (!label) return;
+
+        var id = itemId(categoryId, label);
+        // Avoid duplicates within category
+        var existsBuiltIn = CATEGORIES.some(function (c) {
+          return c.id === categoryId && c.items.some(function (t) {
+            return itemId(c.id, t) === id;
+          });
+        });
+        var customs = customMap[categoryId] || [];
+        var existsCustom = customs.some(function (e) { return e.id === id; });
+        if (existsBuiltIn || existsCustom) {
+          // If it already exists, just focus / flash that row
+          var existing = listEl.querySelector('.item[data-id="' + cssEscape(id) + '"]');
+          if (existing) {
+            existing.scrollIntoView({ behavior: "smooth", block: "center" });
+            existing.style.outline = "2px solid var(--accent)";
+            setTimeout(function () { existing.style.outline = ""; }, 900);
+          }
+          return;
+        }
+
+        customs.push({ id: id, label: label });
+        customMap[categoryId] = customs;
+        saveCustom();
+        renderAll();
+        var row = listEl.querySelector('.item[data-id="' + cssEscape(id) + '"]');
+        if (row) row.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+
+      function deleteCustomItem(id) {
+        Object.keys(customMap).forEach(function (catId) {
+          customMap[catId] = (customMap[catId] || []).filter(function (e) {
+            return e.id !== id;
+          });
+          if (!customMap[catId].length) delete customMap[catId];
+        });
+        delete checkedMap[id];
+        saveCustom();
+        saveChecked();
+        renderAll();
+      }
+
+      function resetAll() {
+        var ok = window.confirm("Reset all packing progress? This cannot be undone.");
+        if (!ok) return;
+        checkedMap = {};
+        localStorage.removeItem(STORAGE_KEY);
+        // Keep custom items; only clear checked state as requested
+        renderAll();
+      }
+
+      // Force-open all details when printing (registered once)
+      window.addEventListener("beforeprint", function () {
+        listEl.querySelectorAll("details.category").forEach(function (d) {
+          d.setAttribute("data-was-open", d.open ? "1" : "0");
+          d.open = true;
+        });
+      });
+      window.addEventListener("afterprint", function () {
+        listEl.querySelectorAll("details.category").forEach(function (d) {
+          if (d.getAttribute("data-was-open") === "0") d.open = false;
+          d.removeAttribute("data-was-open");
+        });
+      });
+
+      // ----- Event delegation -----
+      appEl.addEventListener("click", function (e) {
+        var target = e.target;
+
+        // Filter buttons
+        var filterBtn = target.closest(".filter-btn");
+        if (filterBtn && appEl.contains(filterBtn)) {
+          setFilter(filterBtn.getAttribute("data-filter"));
+          return;
+        }
+
+        // Reset
+        if (target.closest('[data-action="reset"]')) {
+          resetAll();
+          return;
+        }
+
+        // Delete custom item (stop row toggle)
+        var del = target.closest('[data-action="delete"]');
+        if (del) {
+          e.preventDefault();
+          e.stopPropagation();
+          deleteCustomItem(del.getAttribute("data-id"));
+          return;
+        }
+
+        // Toggle via row click (but not when clicking summary/add form)
+        var row = target.closest('.item[data-action="toggle"]');
+        if (row && !target.closest("summary") && !target.closest(".add-row")) {
+          // If they clicked the native checkbox/label, still sync via our handler
+          e.preventDefault();
+          toggleItem(row.getAttribute("data-id"));
+        }
+      });
+
+      // Keyboard: Space/Enter on focused checkbox already works;
+      // also sync change events from keyboard activation
+      appEl.addEventListener("change", function (e) {
+        var input = e.target;
+        if (input && input.matches('input[type="checkbox"]')) {
+          var row = input.closest(".item");
+          if (!row) return;
+          var id = row.getAttribute("data-id");
+          // Align map to checkbox (preventDefault on click means we manage it;
+          // change from keyboard may fire with new state already flipped)
+          checkedMap[id] = input.checked;
+          saveChecked();
+          row.classList.toggle("is-checked", input.checked);
+          var show = itemMatchesFilter(input.checked);
+          row.classList.toggle("is-hidden", !show);
+          updateProgress();
+          updateEmptyState();
+        }
+      });
+
+      appEl.addEventListener("submit", function (e) {
+        var form = e.target.closest('form[data-action="add"]');
+        if (!form) return;
+        e.preventDefault();
+        var input = form.querySelector('input[name="label"]');
+        var catId = form.getAttribute("data-cat");
+        addCustomItem(catId, input.value);
+        input.value = "";
+        input.focus();
+      });
+
+      // ----- Boot -----
+      renderAll();
+    })();
+  </script>
+</body>
+</html>
