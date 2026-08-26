@@ -823,7 +823,7 @@
       <div class="header-top">
         <div class="brand">
           <h1>Saudi Trip — Leisure + Business + Umrah</h1>
-          <p class="weather-note">August in Saudi: 40–48°C. Pack light fabrics and hydrate. 30 kg check-in · 7 kg carry · 3 kg personal.</p>
+          <p class="weather-note" id="weatherNote">August in Saudi: 40–48°C. Pack light fabrics and hydrate.</p>
         </div>
         <button type="button" class="btn-reset" id="resetBtn" data-action="reset">Reset all</button>
       </div>
@@ -884,41 +884,43 @@
         {
           id: "bag-plan",
           title: "Bag Plan — Pack These First",
-          note: "Tick each bag when packed. Wear your heaviest shoes + blazer on the plane to save weight.",
+          note: "22-day trip — tick each bag when packed. Plan one laundry run around day 10–11 to stay under 30 kg.",
           items: [
-            { label: "Check-in suitcase packed (target ≤30 kg)", bag: "checkin", hint: "Bulk clothing, spare shoes, Ihram sets, toiletries, formal wear" },
-            { label: "Hand-carry bag packed (target ≤7 kg)", bag: "carryon", hint: "Laptop, chargers, docs, 1 spare outfit, meds, Haram daypack" },
+            { label: "Check-in suitcase packed (target ≤30 kg)", bag: "checkin", hint: "Bulk clothing, spare shoes, Ihram sets, toiletries — sized for 22 days with mid-trip laundry" },
+            { label: "Hand-carry bag packed (target ≤7 kg)", bag: "carryon", hint: "Laptop, chargers, docs, 2 spare outfits, meds, Haram daypack" },
             { label: "Personal item packed (target ≤3 kg)", bag: "personal", hint: "Wallet, passport pouch, phone, in-flight snacks, lip balm" },
-            { label: "Weigh check-in bag on bathroom scales", bag: "checkin", hint: "Aim for 28–29 kg so you have headroom for last-minute adds" },
+            { label: "Weigh check-in bag on bathroom scales", bag: "checkin", hint: "Aim for 28–29 kg — you'll add snacks and last-minute picks" },
+            { label: "Book / plan laundry for ~day 10–11", bag: "checkin", hint: "Hotel laundry or laundromat — refreshes half your wardrobe for the second half" },
             { label: "Heaviest walking shoes ON FEET for flight", bag: "wear", hint: "Saves ~0.8 kg in the suitcase" },
             { label: "Blazer or light jacket ON PERSON for flight", bag: "wear", hint: "Counts as worn clothing, not bag weight" }
           ]
         },
         {
           id: "wardrobe-plan",
-          title: "Wardrobe — Quantities & Choices",
-          note: "You're an options packer — bring the full set, then pick daily outfits on the ground. All counts are recommended maximums.",
+          title: "Wardrobe — 22-Day Quantities & Choices",
+          note: "22 days is long — pack for ~12–14 days of wear, then laundry mid-trip. Bring options; pick daily outfits on the ground.",
           items: [
-            { label: "Formal shirts ×4 (pick 2 white, 1 blue, 1 stripe)", bag: "checkin", hint: "Business meetings + smart dinners; pack 1 spare in hand carry" },
-            { label: "Formal shirt ×1 spare in hand carry", bag: "carryon", hint: "Backup if checked bag is delayed" },
-            { label: "Formal trousers ×2 (charcoal + navy)", bag: "checkin", hint: "Rotate with formal shirts; both work for business & Umrah exit dinners" },
+            { label: "Formal shirts ×6 (pick 3 white, 2 blue, 1 stripe)", bag: "checkin", hint: "~3 business blocks across 22 days — rotate, don't wear all" },
+            { label: "Formal shirts ×2 spare in hand carry", bag: "carryon", hint: "Backup if checked bag delayed + fresh for key meetings" },
+            { label: "Formal trousers ×3 (charcoal, navy, +1 spare)", bag: "checkin", hint: "Rotate all trip; 3 pairs covers 22 days with laundry" },
             { label: "Suit or blazer ×1", bag: "wear", hint: "Wear on plane OR fold in garment bag in check-in" },
             { label: "Tie ×2 (conservative colours)", bag: "checkin", hint: "One on, one spare" },
             { label: "Dress shoes ×1 pair", bag: "wear", hint: "Wear on plane — heaviest formal shoes" },
-            { label: "Loose cotton long-sleeve shirts ×5", bag: "checkin", hint: "Umrah, mosque visits, heat — light colours" },
-            { label: "Modest T-shirts ×4 (plain, no logos)", bag: "checkin", hint: "Hotel, A/C malls, under layers — leisure picks" },
-            { label: "Long trousers ×3 (casual / Umrah)", bag: "checkin", hint: "Lightweight cotton; not your formal pair" },
+            { label: "Loose cotton long-sleeve shirts ×8", bag: "checkin", hint: "Umrah, mosque, heat — ~1 per 2–3 days, rewear after laundry" },
+            { label: "Modest T-shirts ×7 (plain, no logos)", bag: "checkin", hint: "Hotel, A/C malls, under layers — leisure picks for 22 days" },
+            { label: "Long trousers ×5 (casual / Umrah)", bag: "checkin", hint: "Lightweight cotton; rotate 3–4 days each" },
             { label: "Light jacket or shawl ×1", bag: "carryon", hint: "Freezing A/C in malls & hotels" },
-            { label: "Modest loose clothing / abaya ×1–2", bag: "checkin", hint: "Optional — for Haram & modest leisure" },
-            { label: "Headscarves ×3", bag: "carryon", hint: "Easy access for mosque days" },
-            { label: "Underwear ×10", bag: "checkin", hint: "Excessive-packer buffer — 8 min, 10 comfortable" },
-            { label: "Socks ×10 pairs", bag: "checkin", hint: "Include 2 thin pairs for dress shoes" },
-            { label: "Walking shoes — pair #1 (wear on plane)", bag: "wear", hint: "Broken-in; your best walkers" },
+            { label: "Modest loose clothing / abaya ×2", bag: "checkin", hint: "Haram & modest leisure across 3 weeks" },
+            { label: "Headscarves ×4", bag: "carryon", hint: "Easy access for mosque days" },
+            { label: "Underwear ×14", bag: "checkin", hint: "22-day buffer: 7 on, 7 clean, laundry at day 10–11" },
+            { label: "Socks ×14 pairs", bag: "checkin", hint: "Include 3 thin pairs for dress shoes; heat = fresh socks daily" },
+            { label: "Walking shoes — pair #1 (wear on plane)", bag: "wear", hint: "Broken-in; your best walkers for 22 days" },
             { label: "Walking shoes — pair #2 (check-in)", bag: "checkin", hint: "Spare when pair #1 gets dusty at Haram" },
             { label: "Flip-flops ×1 (hotel / shower)", bag: "checkin", hint: "Light — bottom of suitcase" },
             { label: "Seamless sandals ×1 (Ihram / Haram)", bag: "carryon", hint: "Must stay accessible for Umrah" },
             { label: "Belt ×1 (formal)", bag: "checkin", hint: "Match formal trousers" },
-            { label: "Outfit pick for Day 1 on body", bag: "wear", hint: "Smart-casual that works for airport + arrival" }
+            { label: "Outfit pick for Day 1 on body", bag: "wear", hint: "Smart-casual that works for airport + arrival" },
+            { label: "Travel-size laundry detergent / sheets ×1", bag: "checkin", hint: "Emergency sink-wash between hotel laundry runs" }
           ]
         },
         {
@@ -985,9 +987,9 @@
           id: "health-kit",
           title: "Health Kit",
           items: [
-            { label: "Prescription meds in original packaging", bag: "carryon", hint: "Never check-in — keep 2 days in personal item" },
+            { label: "Prescription meds in original packaging", bag: "carryon", hint: "Full 22+ day supply — never check-in" },
             { label: "Copy of prescription", bag: "carryon" },
-            { label: "Oral rehydration salts", bag: "carryon", hint: "Critical in 40°C+" },
+            { label: "Oral rehydration salts", bag: "carryon", hint: "Critical in 40°C+ over 3 weeks" },
             { label: "Painkillers", bag: "carryon" },
             { label: "Anti-diarrhoeal", bag: "checkin" },
             { label: "Throat lozenges", bag: "personal" },
@@ -1011,7 +1013,7 @@
             { label: "Small backpack for chappals", bag: "checkin" },
             { label: "Sunglasses", bag: "personal" },
             { label: "Cap", bag: "carryon" },
-            { label: "Laundry bag", bag: "checkin" },
+            { label: "Laundry bag", bag: "checkin", hint: "Separate worn items for mid-trip laundry ~day 10–11" },
             { label: "Zip-lock bags", bag: "checkin" },
             { label: "Travel towel", bag: "checkin" },
             { label: "Eye mask", bag: "personal" },
@@ -1131,29 +1133,34 @@
       /** Static packing coach panel (allowance + wardrobe snapshot) */
       function renderGuide() {
         if (!guideEl) return;
+        var weatherEl = document.getElementById("weatherNote");
+        if (weatherEl) {
+          weatherEl.textContent =
+            TRIP_DAYS + "-day trip · August in Saudi: 40–48°C. Pack light fabrics, hydrate. 30 kg check-in · 7 kg carry · 3 kg personal.";
+        }
         guideEl.innerHTML =
           '<div class="guide-card">' +
-          "<h2>Luggage allowance</h2>" +
-          "<p>Leisure + business + Umrah — split weight across three bags so nothing important gets checked.</p>" +
+          "<h2>" + TRIP_DAYS + "-day luggage plan</h2>" +
+          "<p>Leisure + business + Umrah across " + TRIP_DAYS + " days — split weight across three bags. Laundry around day 10–11 keeps the 30 kg limit workable.</p>" +
           '<div class="allowance-grid">' +
           '<div class="allowance-pill"><strong>30 kg</strong><span>Check-in suitcase</span></div>' +
           '<div class="allowance-pill"><strong>7 kg</strong><span>Hand carry</span></div>' +
           '<div class="allowance-pill"><strong>3 kg</strong><span>Personal item</span></div>' +
           "</div>" +
-          '<p class="guide-tip"><strong>Pro move:</strong> Wear dress shoes + heaviest walkers + blazer on the plane. That frees ~2–3 kg in check-in for extras and snacks.</p>' +
+          '<p class="guide-tip"><strong>22-day strategy:</strong> Pack ~12–14 days of clothes, laundry mid-trip, wear dress shoes + heaviest walkers + blazer on the plane. That frees weight for options and snacks.</p>' +
           "</div>" +
           '<div class="guide-card">' +
-          "<h2>Wardrobe at a glance</h2>" +
-          "<p>Recommended counts for an options packer — pick outfits daily, not everything every day.</p>" +
+          "<h2>Wardrobe at a glance (" + TRIP_DAYS + " days)</h2>" +
+          "<p>Options packer counts — pick outfits daily. Laundry at day 10–11 resets the second half.</p>" +
           '<div class="wardrobe-grid">' +
-          '<div class="wardrobe-stat"><span>Formal shirts</span><em>4+1</em></div>' +
-          '<div class="wardrobe-stat"><span>Formal trousers</span><em>2</em></div>' +
-          '<div class="wardrobe-stat"><span>Cotton shirts</span><em>5</em></div>' +
-          '<div class="wardrobe-stat"><span>T-shirts</span><em>4</em></div>' +
-          '<div class="wardrobe-stat"><span>Casual trousers</span><em>3</em></div>' +
+          '<div class="wardrobe-stat"><span>Formal shirts</span><em>6+2</em></div>' +
+          '<div class="wardrobe-stat"><span>Formal trousers</span><em>3</em></div>' +
+          '<div class="wardrobe-stat"><span>Cotton shirts</span><em>8</em></div>' +
+          '<div class="wardrobe-stat"><span>T-shirts</span><em>7</em></div>' +
+          '<div class="wardrobe-stat"><span>Casual trousers</span><em>5</em></div>' +
           '<div class="wardrobe-stat"><span>Shoes total</span><em>4 pr</em></div>' +
-          '<div class="wardrobe-stat"><span>Underwear</span><em>10</em></div>' +
-          '<div class="wardrobe-stat"><span>Socks</span><em>10</em></div>' +
+          '<div class="wardrobe-stat"><span>Underwear</span><em>14</em></div>' +
+          '<div class="wardrobe-stat"><span>Socks</span><em>14</em></div>' +
           "</div>" +
           '<div class="bag-legend">' +
           renderBagBadge("checkin") +
