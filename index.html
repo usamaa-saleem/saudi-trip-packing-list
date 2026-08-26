@@ -387,11 +387,12 @@
     }
 
     .category:nth-child(1) { animation-delay: 0.05s; }
-    .category:nth-child(2) { animation-delay: 0.1s; }
-    .category:nth-child(3) { animation-delay: 0.15s; }
-    .category:nth-child(4) { animation-delay: 0.2s; }
-    .category:nth-child(5) { animation-delay: 0.25s; }
-    .category:nth-child(6) { animation-delay: 0.3s; }
+    .category:nth-child(2) { animation-delay: 0.08s; }
+    .category:nth-child(3) { animation-delay: 0.11s; }
+    .category:nth-child(4) { animation-delay: 0.14s; }
+    .category:nth-child(5) { animation-delay: 0.17s; }
+    .category:nth-child(6) { animation-delay: 0.2s; }
+    .category:nth-child(7) { animation-delay: 0.23s; }
 
     .category[open] {
       border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
@@ -553,6 +554,7 @@
     }
 
     .item-hint {
+      flex: 1 1 100%;
       font-size: 0.75rem;
       color: var(--text-muted);
       line-height: 1.35;
@@ -820,8 +822,8 @@
     <header class="header">
       <div class="header-top">
         <div class="brand">
-          <h1>Saudi Trip — Business + Umrah Packing List</h1>
-          <p class="weather-note">August in Saudi: 40–48°C. Pack light fabrics and hydrate.</p>
+          <h1>Saudi Trip — Leisure + Business + Umrah</h1>
+          <p class="weather-note">August in Saudi: 40–48°C. Pack light fabrics and hydrate. 30 kg check-in · 7 kg carry · 3 kg personal.</p>
         </div>
         <button type="button" class="btn-reset" id="resetBtn" data-action="reset">Reset all</button>
       </div>
@@ -867,6 +869,7 @@
       // ----- Constants -----
       var STORAGE_KEY = "saudi-packing-v1";
       var CUSTOM_KEY = "saudi-packing-custom-v1";
+      var TRIP_DAYS = 22;
 
       /** Bag labels for pills on each item */
       var BAG_LABELS = {
