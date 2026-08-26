@@ -1,17 +1,16 @@
-# Saudi Trip — Business + Umrah Packing List
+# Saudi Trip — Leisure + Business + Umrah Packing List
 
-A single-file, offline-capable packing checklist for a combined business trip and Umrah.
+A single-file, offline-capable packing checklist with luggage allowance guidance, wardrobe quantities, and per-item bag assignments.
 
 ## Features
 
-- 78 curated items across Documents, Ihram & Umrah, Business, Clothing, Health, and Practical
+- **Bag plan**: 30 kg check-in · 7 kg hand carry · 3 kg personal item
+- **Wardrobe coach**: shirt/trouser/shoe counts with "pick from" options for excessive packers
+- **Bag badges** on every item (check-in, hand carry, personal, wear on plane)
 - Collapsible categories with per-section progress
-- Sticky header with overall progress bar
 - Filters: All / Remaining / Packed
 - Custom items per category (persisted)
-- Checked state saved in `localStorage` (`saudi-packing-v1`)
-- Dark mode via `prefers-color-scheme`
-- Print-friendly stylesheet
+- Dark mode · print-friendly
 
 ## Usage
 

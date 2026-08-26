@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#1F5E4A" />
-  <meta name="description" content="Saudi Trip — Business + Umrah Packing List" />
-  <title>Saudi Trip — Business + Umrah Packing List</title>
+  <meta name="description" content="Saudi Trip — Leisure + Business + Umrah Packing List with bag plan" />
+  <title>Saudi Trip — Leisure + Business + Umrah Packing List</title>
   <style>
     /* ========== Design tokens ========== */
     :root {
@@ -260,6 +260,114 @@
 
     .filter-btn:active { transform: scale(0.97); }
 
+    /* ========== Packing guide ========== */
+    .packing-guide {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 14px 0 4px;
+      animation: riseIn 0.5s var(--ease) 0.04s both;
+    }
+
+    .guide-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .guide-card h2 {
+      margin: 0 0 6px;
+      font-size: 1rem;
+      letter-spacing: -0.01em;
+    }
+
+    .guide-card p {
+      margin: 0 0 12px;
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+    }
+
+    .allowance-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    @media (max-width: 520px) {
+      .allowance-grid { grid-template-columns: 1fr; }
+    }
+
+    .allowance-pill {
+      text-align: center;
+      padding: 12px 10px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: var(--bg-muted);
+    }
+
+    .allowance-pill strong {
+      display: block;
+      font-size: 1.25rem;
+      color: var(--accent);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .allowance-pill span {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .wardrobe-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    @media (max-width: 420px) {
+      .wardrobe-grid { grid-template-columns: 1fr; }
+    }
+
+    .wardrobe-stat {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-muted);
+      border: 1px solid var(--border);
+      font-size: 0.8125rem;
+    }
+
+    .wardrobe-stat em {
+      font-style: normal;
+      font-weight: 800;
+      font-size: 1rem;
+      color: var(--accent);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .guide-tip {
+      margin: 12px 0 0;
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      background: var(--accent-soft);
+      font-size: 0.8125rem;
+      color: var(--text);
+    }
+
+    .bag-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
     /* ========== Categories ========== */
     #list {
       display: flex;
@@ -437,6 +545,79 @@
       transition: opacity 0.25s var(--ease), text-decoration-color 0.25s var(--ease);
     }
 
+    .item-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 3px;
+    }
+
+    .item-hint {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      line-height: 1.35;
+    }
+
+    .bag-badge {
+      display: inline-flex;
+      align-items: center;
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      white-space: nowrap;
+    }
+
+    .bag-checkin {
+      background: color-mix(in srgb, var(--accent) 14%, var(--bg-elevated));
+      color: var(--accent);
+      border-color: color-mix(in srgb, var(--accent) 25%, var(--border));
+    }
+
+    .bag-carryon {
+      background: color-mix(in srgb, #8B6914 12%, var(--bg-elevated));
+      color: #8B6914;
+      border-color: color-mix(in srgb, #8B6914 28%, var(--border));
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .bag-carryon { color: #D4A843; }
+    }
+
+    .bag-personal {
+      background: color-mix(in srgb, #5C4D8A 12%, var(--bg-elevated));
+      color: #5C4D8A;
+      border-color: color-mix(in srgb, #5C4D8A 25%, var(--border));
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .bag-personal { color: #A898D8; }
+    }
+
+    .bag-wear {
+      background: color-mix(in srgb, #A63D3D 10%, var(--bg-elevated));
+      color: var(--danger);
+      border-color: color-mix(in srgb, var(--danger) 25%, var(--border));
+    }
+
+    .item-text {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .item {
+      align-items: flex-start;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+
+    .item .box {
+      margin-top: 2px;
+    }
+
     .btn-delete {
       flex-shrink: 0;
       width: 36px;
@@ -593,7 +774,8 @@
       .add-row,
       .btn-delete,
       .footer-hint,
-      .chevron {
+      .chevron,
+      .bag-badge {
         display: none !important;
       }
 
@@ -662,6 +844,8 @@
       </div>
     </div>
 
+    <section class="packing-guide" id="packingGuide" aria-label="Packing coach"></section>
+
     <div id="list"></div>
     <p class="empty-filter" id="emptyFilter">No items match this filter.</p>
     <p class="footer-hint">Progress saves automatically on this device.</p>
@@ -684,23 +868,71 @@
       var STORAGE_KEY = "saudi-packing-v1";
       var CUSTOM_KEY = "saudi-packing-custom-v1";
 
-      /** Built-in packing catalogue */
+      /** Bag labels for pills on each item */
+      var BAG_LABELS = {
+        checkin: "Check-in 30 kg",
+        carryon: "Hand carry 7 kg",
+        personal: "Personal 3 kg",
+        wear: "Wear on plane"
+      };
+
+      /** Built-in packing catalogue — items may be strings or { label, bag, hint } */
       var CATEGORIES = [
+        {
+          id: "bag-plan",
+          title: "Bag Plan — Pack These First",
+          note: "Tick each bag when packed. Wear your heaviest shoes + blazer on the plane to save weight.",
+          items: [
+            { label: "Check-in suitcase packed (target ≤30 kg)", bag: "checkin", hint: "Bulk clothing, spare shoes, Ihram sets, toiletries, formal wear" },
+            { label: "Hand-carry bag packed (target ≤7 kg)", bag: "carryon", hint: "Laptop, chargers, docs, 1 spare outfit, meds, Haram daypack" },
+            { label: "Personal item packed (target ≤3 kg)", bag: "personal", hint: "Wallet, passport pouch, phone, in-flight snacks, lip balm" },
+            { label: "Weigh check-in bag on bathroom scales", bag: "checkin", hint: "Aim for 28–29 kg so you have headroom for last-minute adds" },
+            { label: "Heaviest walking shoes ON FEET for flight", bag: "wear", hint: "Saves ~0.8 kg in the suitcase" },
+            { label: "Blazer or light jacket ON PERSON for flight", bag: "wear", hint: "Counts as worn clothing, not bag weight" }
+          ]
+        },
+        {
+          id: "wardrobe-plan",
+          title: "Wardrobe — Quantities & Choices",
+          note: "You're an options packer — bring the full set, then pick daily outfits on the ground. All counts are recommended maximums.",
+          items: [
+            { label: "Formal shirts ×4 (pick 2 white, 1 blue, 1 stripe)", bag: "checkin", hint: "Business meetings + smart dinners; pack 1 spare in hand carry" },
+            { label: "Formal shirt ×1 spare in hand carry", bag: "carryon", hint: "Backup if checked bag is delayed" },
+            { label: "Formal trousers ×2 (charcoal + navy)", bag: "checkin", hint: "Rotate with formal shirts; both work for business & Umrah exit dinners" },
+            { label: "Suit or blazer ×1", bag: "wear", hint: "Wear on plane OR fold in garment bag in check-in" },
+            { label: "Tie ×2 (conservative colours)", bag: "checkin", hint: "One on, one spare" },
+            { label: "Dress shoes ×1 pair", bag: "wear", hint: "Wear on plane — heaviest formal shoes" },
+            { label: "Loose cotton long-sleeve shirts ×5", bag: "checkin", hint: "Umrah, mosque visits, heat — light colours" },
+            { label: "Modest T-shirts ×4 (plain, no logos)", bag: "checkin", hint: "Hotel, A/C malls, under layers — leisure picks" },
+            { label: "Long trousers ×3 (casual / Umrah)", bag: "checkin", hint: "Lightweight cotton; not your formal pair" },
+            { label: "Light jacket or shawl ×1", bag: "carryon", hint: "Freezing A/C in malls & hotels" },
+            { label: "Modest loose clothing / abaya ×1–2", bag: "checkin", hint: "Optional — for Haram & modest leisure" },
+            { label: "Headscarves ×3", bag: "carryon", hint: "Easy access for mosque days" },
+            { label: "Underwear ×10", bag: "checkin", hint: "Excessive-packer buffer — 8 min, 10 comfortable" },
+            { label: "Socks ×10 pairs", bag: "checkin", hint: "Include 2 thin pairs for dress shoes" },
+            { label: "Walking shoes — pair #1 (wear on plane)", bag: "wear", hint: "Broken-in; your best walkers" },
+            { label: "Walking shoes — pair #2 (check-in)", bag: "checkin", hint: "Spare when pair #1 gets dusty at Haram" },
+            { label: "Flip-flops ×1 (hotel / shower)", bag: "checkin", hint: "Light — bottom of suitcase" },
+            { label: "Seamless sandals ×1 (Ihram / Haram)", bag: "carryon", hint: "Must stay accessible for Umrah" },
+            { label: "Belt ×1 (formal)", bag: "checkin", hint: "Match formal trousers" },
+            { label: "Outfit pick for Day 1 on body", bag: "wear", hint: "Smart-casual that works for airport + arrival" }
+          ]
+        },
         {
           id: "documents-admin",
           title: "Documents & Admin",
           items: [
-            "Passport (6+ months validity)",
-            "Visa / Nusuk permit printout",
-            "MenACWY vaccination certificate",
-            "Flight confirmations",
-            "Hotel bookings",
-            "Travel insurance",
-            "Business cards",
-            "Company invitation letter",
-            "SAR cash",
-            "International debit/credit card",
-            "Photocopies of all documents"
+            { label: "Passport (6+ months validity)", bag: "personal", hint: "Keep on you — never check-in" },
+            { label: "Visa / Nusuk permit printout", bag: "carryon", hint: "Original + photocopy" },
+            { label: "MenACWY vaccination certificate", bag: "carryon" },
+            { label: "Flight confirmations", bag: "personal" },
+            { label: "Hotel bookings", bag: "carryon" },
+            { label: "Travel insurance", bag: "carryon" },
+            { label: "Business cards", bag: "personal" },
+            { label: "Company invitation letter", bag: "carryon" },
+            { label: "SAR cash", bag: "personal" },
+            { label: "International debit/credit card", bag: "personal" },
+            { label: "Photocopies of all documents", bag: "checkin", hint: "Spare set in suitcase" }
           ]
         },
         {
@@ -708,100 +940,79 @@
           title: "Ihram & Umrah",
           note: "Scented products break ihram — check every label.",
           items: [
-            "Ihram set #1",
-            "Ihram set #2 (spare)",
-            "Ihram belt with pouch",
-            "Seamless sandals",
-            "Unscented soap",
-            "Unscented shampoo",
-            "Unscented toothpaste",
-            "Unscented deodorant",
-            "Unscented sunscreen",
-            "Unscented lip balm",
-            "Small prayer mat",
-            "Dua / Umrah guide book",
-            "Tasbeeh",
-            "Drawstring shoe bag for the Haram",
-            "Foldable umbrella",
-            "Water spray bottle",
-            "Collapsible water bottle",
-            "Nail clippers",
-            "Razor or scissors for halq/taqsir"
+            { label: "Ihram set #1", bag: "checkin" },
+            { label: "Ihram set #2 (spare)", bag: "checkin" },
+            { label: "Ihram belt with pouch", bag: "carryon", hint: "Keep with sandals for quick change" },
+            { label: "Seamless sandals", bag: "carryon" },
+            { label: "Unscented soap", bag: "checkin" },
+            { label: "Unscented shampoo", bag: "checkin" },
+            { label: "Unscented toothpaste", bag: "checkin" },
+            { label: "Unscented deodorant", bag: "checkin" },
+            { label: "Unscented sunscreen", bag: "carryon" },
+            { label: "Unscented lip balm", bag: "personal" },
+            { label: "Small prayer mat", bag: "carryon" },
+            { label: "Dua / Umrah guide book", bag: "carryon" },
+            { label: "Tasbeeh", bag: "personal" },
+            { label: "Drawstring shoe bag for the Haram", bag: "carryon" },
+            { label: "Foldable umbrella", bag: "carryon" },
+            { label: "Water spray bottle", bag: "carryon" },
+            { label: "Collapsible water bottle", bag: "carryon" },
+            { label: "Nail clippers", bag: "checkin" },
+            { label: "Razor or scissors for halq/taqsir", bag: "checkin" }
           ]
         },
         {
           id: "business",
-          title: "Business",
+          title: "Business Kit",
+          note: "Keep tech & presentation materials in hand carry — never check-in.",
           items: [
-            "Suit or blazer",
-            "Formal shirts",
-            "Formal trousers",
-            "Tie",
-            "Belt",
-            "Dress shoes",
-            "Laptop",
-            "Laptop charger",
-            "Phone",
-            "Phone charger",
-            "Power bank",
-            "Presentation materials",
-            "Type G plug adapter",
-            "Notebook",
-            "Pens",
-            "Document folder"
-          ]
-        },
-        {
-          id: "clothing",
-          title: "Clothing",
-          items: [
-            "Loose cotton shirts (long sleeve)",
-            "Long trousers",
-            "Underwear",
-            "Socks",
-            "Light jacket or shawl for A/C",
-            "Walking shoes",
-            "Second pair of walking shoes",
-            "Flip-flops for hotel",
-            "Modest loose clothing / abaya",
-            "Headscarves"
+            { label: "Laptop", bag: "carryon" },
+            { label: "Laptop charger", bag: "carryon" },
+            { label: "Phone", bag: "personal" },
+            { label: "Phone charger", bag: "carryon" },
+            { label: "Power bank", bag: "carryon", hint: "Airline rules: usually in hand carry only" },
+            { label: "Presentation materials", bag: "carryon" },
+            { label: "Type G plug adapter", bag: "carryon" },
+            { label: "Notebook", bag: "carryon" },
+            { label: "Pens", bag: "carryon" },
+            { label: "Document folder", bag: "carryon" }
           ]
         },
         {
           id: "health-kit",
           title: "Health Kit",
           items: [
-            "Prescription meds in original packaging",
-            "Copy of prescription",
-            "Oral rehydration salts",
-            "Painkillers",
-            "Anti-diarrhoeal",
-            "Throat lozenges",
-            "Antihistamine",
-            "Blister plasters",
-            "Vaseline for chafing",
-            "Antiseptic cream",
-            "Hand sanitiser",
-            "Face masks"
+            { label: "Prescription meds in original packaging", bag: "carryon", hint: "Never check-in — keep 2 days in personal item" },
+            { label: "Copy of prescription", bag: "carryon" },
+            { label: "Oral rehydration salts", bag: "carryon", hint: "Critical in 40°C+" },
+            { label: "Painkillers", bag: "carryon" },
+            { label: "Anti-diarrhoeal", bag: "checkin" },
+            { label: "Throat lozenges", bag: "personal" },
+            { label: "Antihistamine", bag: "checkin" },
+            { label: "Blister plasters", bag: "carryon" },
+            { label: "Vaseline for chafing", bag: "checkin" },
+            { label: "Antiseptic cream", bag: "checkin" },
+            { label: "Hand sanitiser", bag: "personal" },
+            { label: "Face masks", bag: "carryon" }
           ]
         },
         {
           id: "practical",
           title: "Practical",
           items: [
-            "Tehzeeb biscuit box",
-            "Almond biscotti",
-            "Universal adapter",
-            "Extension lead",
-            "Small backpack for the Haram",
-            "Small backpack for chappals",
-            "Sunglasses",
-            "Cap",
-            "Laundry bag",
-            "Zip-lock bags",
-            "Travel towel",
-            "Eye mask",
-            "Earplugs"
+            { label: "Tehzeeb biscuit box", bag: "carryon", hint: "Priority snack — don't bury in check-in" },
+            { label: "Almond biscotti", bag: "carryon", hint: "Priority snack — share on plane" },
+            { label: "Universal adapter", bag: "checkin" },
+            { label: "Extension lead", bag: "checkin" },
+            { label: "Small backpack for the Haram", bag: "carryon", hint: "Empty/folded in hand carry; pack daily inside" },
+            { label: "Small backpack for chappals", bag: "checkin" },
+            { label: "Sunglasses", bag: "personal" },
+            { label: "Cap", bag: "carryon" },
+            { label: "Laundry bag", bag: "checkin" },
+            { label: "Zip-lock bags", bag: "checkin" },
+            { label: "Travel towel", bag: "checkin" },
+            { label: "Eye mask", bag: "personal" },
+            { label: "Earplugs", bag: "personal" }
           ]
         }
       ];
@@ -824,6 +1035,7 @@
 
       // ----- DOM refs -----
       var appEl = document.getElementById("app");
+      var guideEl = document.getElementById("packingGuide");
       var listEl = document.getElementById("list");
       var progressText = document.getElementById("progressText");
       var progressPct = document.getElementById("progressPct");
@@ -890,12 +1102,74 @@
           .replace(/"/g, "&quot;");
       }
 
+      /** Normalize string or object item entries */
+      function normalizeEntry(entry) {
+        if (typeof entry === "string") {
+          return { label: entry, bag: null, hint: null };
+        }
+        return {
+          label: entry.label,
+          bag: entry.bag || null,
+          hint: entry.hint || null
+        };
+      }
+
+      function renderBagBadge(bag) {
+        if (!bag || !BAG_LABELS[bag]) return "";
+        return (
+          '<span class="bag-badge bag-' +
+          escapeHtml(bag) +
+          '">' +
+          escapeHtml(BAG_LABELS[bag]) +
+          "</span>"
+        );
+      }
+
+      /** Static packing coach panel (allowance + wardrobe snapshot) */
+      function renderGuide() {
+        if (!guideEl) return;
+        guideEl.innerHTML =
+          '<div class="guide-card">' +
+          "<h2>Luggage allowance</h2>" +
+          "<p>Leisure + business + Umrah — split weight across three bags so nothing important gets checked.</p>" +
+          '<div class="allowance-grid">' +
+          '<div class="allowance-pill"><strong>30 kg</strong><span>Check-in suitcase</span></div>' +
+          '<div class="allowance-pill"><strong>7 kg</strong><span>Hand carry</span></div>' +
+          '<div class="allowance-pill"><strong>3 kg</strong><span>Personal item</span></div>' +
+          "</div>" +
+          '<p class="guide-tip"><strong>Pro move:</strong> Wear dress shoes + heaviest walkers + blazer on the plane. That frees ~2–3 kg in check-in for extras and snacks.</p>' +
+          "</div>" +
+          '<div class="guide-card">' +
+          "<h2>Wardrobe at a glance</h2>" +
+          "<p>Recommended counts for an options packer — pick outfits daily, not everything every day.</p>" +
+          '<div class="wardrobe-grid">' +
+          '<div class="wardrobe-stat"><span>Formal shirts</span><em>4+1</em></div>' +
+          '<div class="wardrobe-stat"><span>Formal trousers</span><em>2</em></div>' +
+          '<div class="wardrobe-stat"><span>Cotton shirts</span><em>5</em></div>' +
+          '<div class="wardrobe-stat"><span>T-shirts</span><em>4</em></div>' +
+          '<div class="wardrobe-stat"><span>Casual trousers</span><em>3</em></div>' +
+          '<div class="wardrobe-stat"><span>Shoes total</span><em>4 pr</em></div>' +
+          '<div class="wardrobe-stat"><span>Underwear</span><em>10</em></div>' +
+          '<div class="wardrobe-stat"><span>Socks</span><em>10</em></div>' +
+          "</div>" +
+          '<div class="bag-legend">' +
+          renderBagBadge("checkin") +
+          renderBagBadge("carryon") +
+          renderBagBadge("personal") +
+          renderBagBadge("wear") +
+          "</div>" +
+          "</div>";
+      }
+
       /** Collect every item (built-in + custom) for a category. */
       function getCategoryItems(cat) {
-        var builtIn = cat.items.map(function (label) {
+        var builtIn = cat.items.map(function (entry) {
+          var norm = normalizeEntry(entry);
           return {
-            id: itemId(cat.id, label),
-            label: label,
+            id: itemId(cat.id, norm.label),
+            label: norm.label,
+            bag: norm.bag,
+            hint: norm.hint,
             custom: false
           };
         });
@@ -903,6 +1177,8 @@
           return {
             id: entry.id,
             label: entry.label,
+            bag: entry.bag || null,
+            hint: entry.hint || null,
             custom: true
           };
         });
@@ -944,11 +1220,19 @@
           '<span class="box" aria-hidden="true">' +
           CHECK_SVG +
           "</span>" +
+          '<div class="item-text">' +
           '<label class="item-label" for="' +
           escapeHtml(item.id) +
           '">' +
           escapeHtml(item.label) +
           "</label>" +
+          (item.hint || item.bag
+            ? '<div class="item-meta">' +
+              renderBagBadge(item.bag) +
+              (item.hint ? '<span class="item-hint">' + escapeHtml(item.hint) + "</span>" : "") +
+              "</div>"
+            : "") +
+          "</div>" +
           deleteBtn +
           "</div>"
         );
@@ -1136,7 +1420,7 @@
         // Avoid duplicates within category
         var existsBuiltIn = CATEGORIES.some(function (c) {
           return c.id === categoryId && c.items.some(function (t) {
-            return itemId(c.id, t) === id;
+            return itemId(c.id, normalizeEntry(t).label) === id;
           });
         });
         var customs = customMap[categoryId] || [];
@@ -1263,6 +1547,7 @@
       });
 
       // ----- Boot -----
+      renderGuide();
       renderAll();
     })();
   </script>
