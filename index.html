@@ -208,8 +208,8 @@
       outline-offset: 2px;
     }
 
-    .panel { display: none; }
-    .panel.is-active { display: block; }
+      .panel.is-active { display: block; }
+    .panel[hidden] { display: none !important; }
 
     /* ========== Toolbar ========== */
     .toolbar {
@@ -1230,14 +1230,16 @@
         if (!opened && sections[0]) sections[0].open = true;
       }
 
-      /** Accordion — one open category at a time */
+      /** Accordion — one open category at a time (bound once) */
+      var accordionBound = false;
       function bindAccordion() {
-        listEl.querySelectorAll("details.category").forEach(function (section) {
-          section.addEventListener("toggle", function () {
-            if (!section.open) return;
-            listEl.querySelectorAll("details.category").forEach(function (other) {
-              if (other !== section) other.open = false;
-            });
+        if (accordionBound) return;
+        accordionBound = true;
+        listEl.addEventListener("toggle", function (e) {
+          var section = e.target;
+          if (!section.matches || !section.matches("details.category") || !section.open) return;
+          listEl.querySelectorAll("details.category").forEach(function (other) {
+            if (other !== section) other.open = false;
           });
         });
       }
