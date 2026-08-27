@@ -57,22 +57,10 @@
     body {
       margin: 0;
       font-family: var(--font);
-      background:
-        radial-gradient(1200px 600px at 10% -10%, rgba(31, 94, 74, 0.08), transparent 55%),
-        radial-gradient(900px 500px at 100% 0%, rgba(196, 149, 90, 0.1), transparent 50%),
-        var(--bg);
+      background: var(--bg);
       color: var(--text);
       line-height: 1.45;
       min-height: 100dvh;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      body {
-        background:
-          radial-gradient(1000px 500px at 15% -15%, rgba(61, 155, 122, 0.12), transparent 55%),
-          radial-gradient(800px 400px at 100% 0%, rgba(196, 149, 90, 0.06), transparent 50%),
-          var(--bg);
-      }
     }
 
     button, input { font: inherit; color: inherit; }
@@ -90,17 +78,11 @@
       top: 0;
       z-index: 40;
       margin: 0 -16px;
-      padding: 16px 16px 14px;
-      background: color-mix(in srgb, var(--bg) 88%, transparent);
-      backdrop-filter: blur(14px) saturate(1.2);
-      -webkit-backdrop-filter: blur(14px) saturate(1.2);
+      padding: 14px 16px 12px;
+      background: color-mix(in srgb, var(--bg) 92%, transparent);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
-      animation: headerIn 0.55s var(--ease) both;
-    }
-
-    @keyframes headerIn {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: none; }
     }
 
     .header-top {
@@ -117,40 +99,40 @@
 
     .brand h1 {
       margin: 0;
-      font-size: clamp(1.15rem, 4.2vw, 1.45rem);
+      font-size: clamp(1.1rem, 4vw, 1.35rem);
       font-weight: 700;
       letter-spacing: -0.02em;
       line-height: 1.25;
     }
 
     .weather-note {
-      margin: 6px 0 0;
+      margin: 4px 0 0;
       font-size: 0.8125rem;
       color: var(--text-muted);
-      max-width: 42ch;
     }
 
-    .btn-reset {
+    .header-actions {
+      display: flex;
+      gap: 8px;
       flex-shrink: 0;
-      min-height: var(--tap);
-      padding: 0 14px;
+    }
+
+    .btn-ghost {
+      min-height: 40px;
+      padding: 0 12px;
       border: 1px solid var(--border);
       border-radius: 999px;
       background: var(--bg-elevated);
       color: var(--text-muted);
       cursor: pointer;
-      transition: background 0.2s var(--ease), color 0.2s var(--ease), border-color 0.2s var(--ease), transform 0.15s var(--ease);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      transition: background 0.2s var(--ease), color 0.2s var(--ease);
     }
 
-    .btn-reset:hover {
-      color: var(--danger);
-      border-color: color-mix(in srgb, var(--danger) 40%, var(--border));
-      background: var(--danger-soft);
-    }
+    .btn-ghost:hover { color: var(--text); }
 
-    .btn-reset:active { transform: scale(0.97); }
-
-    .btn-reset:focus-visible {
+    .btn-ghost:focus-visible {
       outline: 2px solid var(--accent);
       outline-offset: 2px;
     }
@@ -187,40 +169,56 @@
       height: 100%;
       width: 0%;
       border-radius: inherit;
-      background: linear-gradient(90deg, var(--accent), color-mix(in srgb, var(--accent) 70%, #7BC4A4));
-      transition: width 0.45s var(--ease);
-      position: relative;
+      background: var(--accent);
+      transition: width 0.35s var(--ease);
     }
 
-    .progress-fill::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.28) 50%, transparent 70%);
-      background-size: 200% 100%;
-      animation: sheen 2.8s ease-in-out infinite;
-      pointer-events: none;
+    /* ========== View tabs ========== */
+    .view-tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      margin: 14px 0 10px;
+      padding: 4px;
+      border-radius: 999px;
+      background: var(--bg-muted);
+      border: 1px solid var(--border);
     }
 
-    @keyframes sheen {
-      0%, 100% { background-position: 120% 0; }
-      50% { background-position: -20% 0; }
+    .view-tab {
+      min-height: 42px;
+      border: none;
+      border-radius: 999px;
+      background: transparent;
+      color: var(--text-muted);
+      font-weight: 650;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: background 0.2s var(--ease), color 0.2s var(--ease);
     }
+
+    .view-tab[aria-pressed="true"] {
+      background: var(--bg-elevated);
+      color: var(--accent);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .view-tab:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .panel { display: none; }
+    .panel.is-active { display: block; }
 
     /* ========== Toolbar ========== */
     .toolbar {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 8px;
       align-items: center;
       justify-content: space-between;
-      margin: 18px 0 8px;
-      animation: riseIn 0.5s var(--ease) 0.08s both;
-    }
-
-    @keyframes riseIn {
-      from { opacity: 0; transform: translateY(12px); }
-      to { opacity: 1; transform: none; }
+      margin: 0 0 10px;
     }
 
     .filters {
@@ -260,13 +258,41 @@
 
     .filter-btn:active { transform: scale(0.97); }
 
+    .btn-details {
+      min-height: 40px;
+      padding: 0 12px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--bg-elevated);
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      transition: background 0.2s var(--ease), color 0.2s var(--ease);
+    }
+
+    .btn-details[aria-pressed="true"] {
+      background: var(--accent-soft);
+      color: var(--accent);
+      border-color: color-mix(in srgb, var(--accent) 30%, var(--border));
+    }
+
+    .btn-details:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    /* Hide bag/hint clutter unless details mode is on */
+    .app:not(.details-on) .item-meta { display: none; }
+    .app:not(.details-on) .cat-note { display: none; }
+    .app:not(.details-on) .add-row { display: none; }
+
     /* ========== Packing guide ========== */
     .packing-guide {
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      margin: 14px 0 4px;
-      animation: riseIn 0.5s var(--ease) 0.04s both;
+      gap: 10px;
+      margin: 0;
     }
 
     .guide-card {
@@ -372,30 +398,20 @@
     #list {
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      margin-top: 12px;
+      gap: 8px;
+      margin-top: 0;
     }
 
     .category {
       background: var(--bg-elevated);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      box-shadow: var(--shadow-soft);
       overflow: hidden;
-      animation: riseIn 0.55s var(--ease) both;
-      transition: border-color 0.25s var(--ease), transform 0.25s var(--ease);
+      transition: border-color 0.2s var(--ease);
     }
 
-    .category:nth-child(1) { animation-delay: 0.05s; }
-    .category:nth-child(2) { animation-delay: 0.08s; }
-    .category:nth-child(3) { animation-delay: 0.11s; }
-    .category:nth-child(4) { animation-delay: 0.14s; }
-    .category:nth-child(5) { animation-delay: 0.17s; }
-    .category:nth-child(6) { animation-delay: 0.2s; }
-    .category:nth-child(7) { animation-delay: 0.23s; }
-
     .category[open] {
-      border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
+      border-color: color-mix(in srgb, var(--accent) 28%, var(--border));
     }
 
     .category summary {
@@ -465,17 +481,11 @@
       align-items: center;
       gap: 12px;
       min-height: var(--tap);
-      padding: 8px 10px;
-      margin: 2px 0;
+      padding: 6px 10px;
+      margin: 1px 0;
       border-radius: var(--radius-sm);
       cursor: pointer;
-      transition: background 0.2s var(--ease), opacity 0.3s var(--ease), transform 0.2s var(--ease);
-      animation: itemIn 0.35s var(--ease) both;
-    }
-
-    @keyframes itemIn {
-      from { opacity: 0; transform: translateX(-6px); }
-      to { opacity: 1; transform: none; }
+      transition: background 0.15s var(--ease), opacity 0.25s var(--ease);
     }
 
     .item:hover { background: var(--bg-muted); }
@@ -526,7 +536,6 @@
     .item input:checked + .box {
       background: var(--accent);
       border-color: var(--accent);
-      transform: scale(1.05);
     }
 
     .item input:checked + .box svg {
@@ -610,13 +619,23 @@
       min-width: 0;
     }
 
-    .item {
+    .app:not(.details-on) .item {
+      align-items: center;
+      padding-top: 6px;
+      padding-bottom: 6px;
+    }
+
+    .app:not(.details-on) .item .box {
+      margin-top: 0;
+    }
+
+    .app.details-on .item {
       align-items: flex-start;
       padding-top: 10px;
       padding-bottom: 10px;
     }
 
-    .item .box {
+    .app.details-on .item .box {
       margin-top: 2px;
     }
 
@@ -704,15 +723,28 @@
       display: none;
     }
 
-    .empty-filter.visible { display: block; animation: riseIn 0.35s var(--ease); }
+    .empty-filter.visible { display: block; }
 
     .footer-hint {
-      margin-top: 28px;
+      margin-top: 20px;
       text-align: center;
       font-size: 0.75rem;
       color: var(--text-muted);
-      opacity: 0.8;
     }
+
+    .footer-reset {
+      display: block;
+      margin: 8px auto 0;
+      border: none;
+      background: none;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .footer-reset:hover { color: var(--danger); }
 
     /* Completion toast */
     .toast {
@@ -776,8 +808,10 @@
       .add-row,
       .btn-delete,
       .footer-hint,
+      .footer-reset,
       .chevron,
-      .bag-badge {
+      .bag-badge,
+      .view-tabs {
         display: none !important;
       }
 
@@ -822,10 +856,9 @@
     <header class="header">
       <div class="header-top">
         <div class="brand">
-          <h1>Saudi Trip — Leisure + Business + Umrah</h1>
-          <p class="weather-note" id="weatherNote">August in Saudi: 40–48°C. Pack light fabrics and hydrate.</p>
+          <h1>Saudi Trip Packing</h1>
+          <p class="weather-note" id="weatherNote">22-day trip · Aug 40–48°C</p>
         </div>
-        <button type="button" class="btn-reset" id="resetBtn" data-action="reset">Reset all</button>
       </div>
       <div class="progress-block" aria-live="polite">
         <div class="progress-meta">
@@ -838,19 +871,30 @@
       </div>
     </header>
 
-    <div class="toolbar">
-      <div class="filters" role="group" aria-label="Filter items">
-        <button type="button" class="filter-btn" data-filter="all" aria-pressed="true">All</button>
-        <button type="button" class="filter-btn" data-filter="remaining" aria-pressed="false">Remaining</button>
-        <button type="button" class="filter-btn" data-filter="packed" aria-pressed="false">Packed</button>
-      </div>
+    <div class="view-tabs" role="tablist" aria-label="Main views">
+      <button type="button" class="view-tab" data-view="pack" role="tab" aria-pressed="true" aria-controls="packPanel">Checklist</button>
+      <button type="button" class="view-tab" data-view="guide" role="tab" aria-pressed="false" aria-controls="guidePanel">Guide</button>
     </div>
 
-    <section class="packing-guide" id="packingGuide" aria-label="Packing coach"></section>
+    <div class="panel is-active" id="packPanel" role="tabpanel">
+      <div class="toolbar">
+        <div class="filters" role="group" aria-label="Filter items">
+          <button type="button" class="filter-btn" data-filter="remaining" aria-pressed="true">To pack</button>
+          <button type="button" class="filter-btn" data-filter="all" aria-pressed="false">All</button>
+          <button type="button" class="filter-btn" data-filter="packed" aria-pressed="false">Done</button>
+        </div>
+        <button type="button" class="btn-details" id="detailsBtn" data-action="details" aria-pressed="false">Details</button>
+      </div>
+      <div id="list"></div>
+      <p class="empty-filter" id="emptyFilter">Nothing left in this filter — nice work.</p>
+    </div>
 
-    <div id="list"></div>
-    <p class="empty-filter" id="emptyFilter">No items match this filter.</p>
-    <p class="footer-hint">Progress saves automatically on this device.</p>
+    <div class="panel" id="guidePanel" role="tabpanel" hidden>
+      <section class="packing-guide" id="packingGuide" aria-label="Packing guide"></section>
+    </div>
+
+    <p class="footer-hint">Progress saves on this device.</p>
+    <button type="button" class="footer-reset" data-action="reset">Reset all progress</button>
   </div>
   <div class="toast" id="toast" role="status" aria-live="polite" hidden>All packed — safe travels!</div>
 
@@ -869,14 +913,16 @@
       // ----- Constants -----
       var STORAGE_KEY = "saudi-packing-v1";
       var CUSTOM_KEY = "saudi-packing-custom-v1";
+      var DETAILS_KEY = "saudi-packing-details-v1";
+      var VIEW_KEY = "saudi-packing-view-v1";
       var TRIP_DAYS = 22;
 
-      /** Bag labels for pills on each item */
+      /** Short bag labels when details mode is on */
       var BAG_LABELS = {
-        checkin: "Check-in 30 kg",
-        carryon: "Hand carry 7 kg",
-        personal: "Personal 3 kg",
-        wear: "Wear on plane"
+        checkin: "Check-in",
+        carryon: "Carry-on",
+        personal: "Personal",
+        wear: "Wear"
       };
 
       /** Built-in packing catalogue — items may be strings or { label, bag, hint } */
@@ -1036,12 +1082,17 @@
       // ----- State -----
       var checkedMap = loadChecked();
       var customMap = loadCustom();
-      var currentFilter = "all"; // all | remaining | packed
+      var currentFilter = "remaining"; // remaining | all | packed
+      var showDetails = loadDetails();
+      var currentView = loadView();
 
       // ----- DOM refs -----
       var appEl = document.getElementById("app");
       var guideEl = document.getElementById("packingGuide");
       var listEl = document.getElementById("list");
+      var packPanel = document.getElementById("packPanel");
+      var guidePanel = document.getElementById("guidePanel");
+      var detailsBtn = document.getElementById("detailsBtn");
       var progressText = document.getElementById("progressText");
       var progressPct = document.getElementById("progressPct");
       var progressFill = document.getElementById("progressFill");
@@ -1099,6 +1150,98 @@
         localStorage.setItem(CUSTOM_KEY, JSON.stringify(customMap));
       }
 
+      function loadDetails() {
+        try {
+          return localStorage.getItem(DETAILS_KEY) === "1";
+        } catch (e) {
+          return false;
+        }
+      }
+
+      function saveDetails() {
+        localStorage.setItem(DETAILS_KEY, showDetails ? "1" : "0");
+      }
+
+      function loadView() {
+        try {
+          var v = localStorage.getItem(VIEW_KEY);
+          return v === "guide" ? "guide" : "pack";
+        } catch (e) {
+          return "pack";
+        }
+      }
+
+      function saveView() {
+        localStorage.setItem(VIEW_KEY, currentView);
+      }
+
+      function applyDetailsUi() {
+        appEl.classList.toggle("details-on", showDetails);
+        if (detailsBtn) {
+          detailsBtn.setAttribute("aria-pressed", showDetails ? "true" : "false");
+          detailsBtn.textContent = showDetails ? "Hide details" : "Details";
+        }
+      }
+
+      function setView(next) {
+        currentView = next;
+        saveView();
+        document.querySelectorAll(".view-tab").forEach(function (btn) {
+          var on = btn.getAttribute("data-view") === next;
+          btn.setAttribute("aria-pressed", on ? "true" : "false");
+        });
+        if (packPanel) {
+          packPanel.classList.toggle("is-active", next === "pack");
+          packPanel.hidden = next !== "pack";
+        }
+        if (guidePanel) {
+          guidePanel.classList.toggle("is-active", next === "guide");
+          guidePanel.hidden = next !== "guide";
+        }
+      }
+
+      function toggleDetails() {
+        showDetails = !showDetails;
+        saveDetails();
+        applyDetailsUi();
+      }
+
+      /** Open first category that still has unpacked visible items */
+      function openFirstIncomplete() {
+        var sections = listEl.querySelectorAll("details.category");
+        var opened = false;
+        sections.forEach(function (section) {
+          if (opened) {
+            section.open = false;
+            return;
+          }
+          var items = section.querySelectorAll(".item:not(.is-hidden)");
+          var hasRemaining = false;
+          items.forEach(function (row) {
+            if (!row.classList.contains("is-checked")) hasRemaining = true;
+          });
+          if (hasRemaining && items.length) {
+            section.open = true;
+            opened = true;
+          } else {
+            section.open = false;
+          }
+        });
+        if (!opened && sections[0]) sections[0].open = true;
+      }
+
+      /** Accordion — one open category at a time */
+      function bindAccordion() {
+        listEl.querySelectorAll("details.category").forEach(function (section) {
+          section.addEventListener("toggle", function () {
+            if (!section.open) return;
+            listEl.querySelectorAll("details.category").forEach(function (other) {
+              if (other !== section) other.open = false;
+            });
+          });
+        });
+      }
+
       function escapeHtml(str) {
         return String(str)
           .replace(/&/g, "&amp;")
@@ -1135,30 +1278,29 @@
         if (!guideEl) return;
         var weatherEl = document.getElementById("weatherNote");
         if (weatherEl) {
-          weatherEl.textContent =
-            TRIP_DAYS + "-day trip · August in Saudi: 40–48°C. Pack light fabrics, hydrate. 30 kg check-in · 7 kg carry · 3 kg personal.";
+          weatherEl.textContent = TRIP_DAYS + "-day trip · Aug 40–48°C";
         }
         guideEl.innerHTML =
           '<div class="guide-card">' +
-          "<h2>" + TRIP_DAYS + "-day luggage plan</h2>" +
-          "<p>Leisure + business + Umrah across " + TRIP_DAYS + " days — split weight across three bags. Laundry around day 10–11 keeps the 30 kg limit workable.</p>" +
+          "<h2>" + TRIP_DAYS + "-day luggage</h2>" +
+          "<p>30 kg check-in · 7 kg carry · 3 kg personal. Laundry around day 10–11.</p>" +
           '<div class="allowance-grid">' +
-          '<div class="allowance-pill"><strong>30 kg</strong><span>Check-in suitcase</span></div>' +
+          '<div class="allowance-pill"><strong>30 kg</strong><span>Check-in</span></div>' +
           '<div class="allowance-pill"><strong>7 kg</strong><span>Hand carry</span></div>' +
-          '<div class="allowance-pill"><strong>3 kg</strong><span>Personal item</span></div>' +
+          '<div class="allowance-pill"><strong>3 kg</strong><span>Personal</span></div>' +
           "</div>" +
-          '<p class="guide-tip"><strong>22-day strategy:</strong> Pack ~12–14 days of clothes, laundry mid-trip, wear dress shoes + heaviest walkers + blazer on the plane. That frees weight for options and snacks.</p>' +
+          '<p class="guide-tip">Wear dress shoes + heaviest walkers + blazer on the plane. Pack ~12–14 days of clothes, then laundry mid-trip.</p>' +
           "</div>" +
           '<div class="guide-card">' +
-          "<h2>Wardrobe at a glance (" + TRIP_DAYS + " days)</h2>" +
-          "<p>Options packer counts — pick outfits daily. Laundry at day 10–11 resets the second half.</p>" +
+          "<h2>Wardrobe counts</h2>" +
+          "<p>Bring options — pick outfits daily.</p>" +
           '<div class="wardrobe-grid">' +
           '<div class="wardrobe-stat"><span>Formal shirts</span><em>6+2</em></div>' +
           '<div class="wardrobe-stat"><span>Formal trousers</span><em>3</em></div>' +
           '<div class="wardrobe-stat"><span>Cotton shirts</span><em>8</em></div>' +
           '<div class="wardrobe-stat"><span>T-shirts</span><em>7</em></div>' +
           '<div class="wardrobe-stat"><span>Casual trousers</span><em>5</em></div>' +
-          '<div class="wardrobe-stat"><span>Shoes total</span><em>4 pr</em></div>' +
+          '<div class="wardrobe-stat"><span>Shoes</span><em>4 pr</em></div>' +
           '<div class="wardrobe-stat"><span>Underwear</span><em>14</em></div>' +
           '<div class="wardrobe-stat"><span>Socks</span><em>14</em></div>' +
           "</div>" +
@@ -1274,7 +1416,7 @@
         return (
           '<details class="category" data-cat="' +
           escapeHtml(cat.id) +
-          '" open' +
+          '"' +
           sectionHidden +
           ">" +
           "<summary>" +
@@ -1310,6 +1452,9 @@
 
       function renderAll() {
         listEl.innerHTML = CATEGORIES.map(renderCategory).join("");
+        applyFilter();
+        bindAccordion();
+        openFirstIncomplete();
         updateProgress();
         updateEmptyState();
       }
@@ -1391,6 +1536,7 @@
           btn.setAttribute("aria-pressed", btn.getAttribute("data-filter") === next ? "true" : "false");
         });
         applyFilter();
+        openFirstIncomplete();
       }
 
       function toggleItem(id) {
@@ -1501,6 +1647,19 @@
           return;
         }
 
+        // View tabs
+        var viewTab = target.closest(".view-tab");
+        if (viewTab && appEl.contains(viewTab)) {
+          setView(viewTab.getAttribute("data-view"));
+          return;
+        }
+
+        // Details toggle
+        if (target.closest('[data-action="details"]')) {
+          toggleDetails();
+          return;
+        }
+
         // Reset
         if (target.closest('[data-action="reset"]')) {
           resetAll();
@@ -1558,6 +1717,8 @@
 
       // ----- Boot -----
       renderGuide();
+      applyDetailsUi();
+      setView(currentView);
       renderAll();
     })();
   </script>
