@@ -1381,7 +1381,7 @@
           '<div class="guide-card">' +
           '<div class="guide-section">' +
           "<h2>" + TRIP_DAYS + "-day luggage</h2>" +
-          "<p>30 kg check-in · 7 kg carry · 3 kg personal. Laundry around day 10–11.</p>" +
+          "<p>Split weight across three bags. Plan laundry around day 10–11.</p>" +
           '<div class="allowance-grid">' +
           '<div class="allowance-pill"><strong>30 kg</strong><span>Check-in</span></div>' +
           '<div class="allowance-pill"><strong>7 kg</strong><span>Hand carry</span></div>' +
@@ -1402,11 +1402,15 @@
           '<div class="wardrobe-stat"><span>Shoes</span><em>4 pr</em></div>' +
           '<div class="wardrobe-stat"><span>Underwear / socks</span><em>14</em></div>' +
           "</div>" +
+          "</div>" +
+          '<div class="guide-section">' +
+          "<h2>Bag tags</h2>" +
+          "<p>Each checklist item shows where it goes.</p>" +
           '<div class="bag-legend">' +
-          renderBagBadge("checkin") +
-          renderBagBadge("carryon") +
-          renderBagBadge("personal") +
-          renderBagBadge("wear") +
+          '<div class="legend-row">' + renderBagBadge("checkin") + "<span>Suitcase — bulk clothes & toiletries</span></div>" +
+          '<div class="legend-row">' + renderBagBadge("carryon") + "<span>Cabin bag — laptop, docs, meds</span></div>" +
+          '<div class="legend-row">' + renderBagBadge("personal") + "<span>On you — passport, phone, wallet</span></div>" +
+          '<div class="legend-row">' + renderBagBadge("wear") + "<span>Wear on the plane to save weight</span></div>" +
           "</div>" +
           "</div>" +
           "</div>";
