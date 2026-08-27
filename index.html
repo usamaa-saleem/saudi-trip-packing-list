@@ -291,8 +291,8 @@
       outline-offset: 2px;
     }
 
-    /* Hide bag/hint clutter unless details mode is on */
-    .app:not(.details-on) .item-meta { display: none; }
+    /* Hide extra notes unless details mode is on — bag tags always show */
+    .app:not(.details-on) .item-hint { display: none; }
     .app:not(.details-on) .cat-note { display: none; }
     .app:not(.details-on) .add-row { display: none; }
 
@@ -511,10 +511,10 @@
     /* ========== Items ========== */
     .item {
       display: flex;
-      align-items: center;
-      gap: 12px;
+      align-items: flex-start;
+      gap: 10px;
       min-height: var(--tap);
-      padding: 6px 10px;
+      padding: 8px 10px;
       margin: 1px 0;
       border-radius: var(--radius-sm);
       cursor: pointer;
@@ -581,22 +581,20 @@
       outline-offset: 3px;
     }
 
+    .item .box {
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
     .item-label {
-      flex: 1;
-      min-width: 0;
+      display: block;
       font-size: 0.9375rem;
       transition: opacity 0.25s var(--ease), text-decoration-color 0.25s var(--ease);
     }
 
-    .item-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 3px;
-    }
-
     .item-hint {
-      flex: 1 1 100%;
+      display: block;
+      margin-top: 4px;
       font-size: 0.75rem;
       color: var(--text-muted);
       line-height: 1.35;
@@ -605,11 +603,14 @@
     .bag-badge {
       display: inline-flex;
       align-items: center;
-      font-size: 0.6875rem;
+      flex-shrink: 0;
+      align-self: center;
+      margin-left: auto;
+      font-size: 0.625rem;
       font-weight: 700;
-      letter-spacing: 0.02em;
+      letter-spacing: 0.03em;
       text-transform: uppercase;
-      padding: 2px 7px;
+      padding: 3px 8px;
       border-radius: 999px;
       border: 1px solid transparent;
       white-space: nowrap;
@@ -650,26 +651,6 @@
     .item-text {
       flex: 1;
       min-width: 0;
-    }
-
-    .app:not(.details-on) .item {
-      align-items: center;
-      padding-top: 6px;
-      padding-bottom: 6px;
-    }
-
-    .app:not(.details-on) .item .box {
-      margin-top: 0;
-    }
-
-    .app.details-on .item {
-      align-items: flex-start;
-      padding-top: 10px;
-      padding-bottom: 10px;
-    }
-
-    .app.details-on .item .box {
-      margin-top: 2px;
     }
 
     .btn-delete {
@@ -843,9 +824,12 @@
       .footer-hint,
       .footer-reset,
       .chevron,
-      .bag-badge,
       .view-tabs {
         display: none !important;
+      }
+
+      .bag-badge {
+        font-size: 0.6rem !important;
       }
 
       .category {
@@ -916,7 +900,7 @@
           <button type="button" class="filter-btn" data-filter="all" aria-pressed="false">All</button>
           <button type="button" class="filter-btn" data-filter="packed" aria-pressed="false">Done</button>
         </div>
-        <button type="button" class="btn-details" id="detailsBtn" data-action="details" aria-pressed="false">Details</button>
+        <button type="button" class="btn-details" id="detailsBtn" data-action="details" aria-pressed="false">Notes</button>
       </div>
       <div id="list"></div>
       <p class="empty-filter" id="emptyFilter">Nothing left in this filter — nice work.</p>
@@ -950,11 +934,18 @@
       var VIEW_KEY = "saudi-packing-view-v1";
       var TRIP_DAYS = 22;
 
-      /** Short bag labels when details mode is on */
+      /** Short bag labels shown on every item */
       var BAG_LABELS = {
         checkin: "Check-in",
         carryon: "Carry-on",
         personal: "Personal",
+        wear: "Wear"
+      };
+
+      var BAG_SHORT = {
+        checkin: "30 kg",
+        carryon: "7 kg",
+        personal: "3 kg",
         wear: "Wear"
       };
 
@@ -1212,7 +1203,7 @@
         appEl.classList.toggle("details-on", showDetails);
         if (detailsBtn) {
           detailsBtn.setAttribute("aria-pressed", showDetails ? "true" : "false");
-          detailsBtn.textContent = showDetails ? "Hide details" : "Details";
+          detailsBtn.textContent = showDetails ? "Hide notes" : "Notes";
         }
       }
 
@@ -1295,13 +1286,16 @@
         };
       }
 
-      function renderBagBadge(bag) {
+      function renderBagBadge(bag, compact) {
         if (!bag || !BAG_LABELS[bag]) return "";
+        var label = compact && BAG_SHORT[bag] ? BAG_SHORT[bag] : BAG_LABELS[bag];
         return (
           '<span class="bag-badge bag-' +
           escapeHtml(bag) +
-          '">' +
+          '" title="' +
           escapeHtml(BAG_LABELS[bag]) +
+          '">' +
+          escapeHtml(label) +
           "</span>"
         );
       }
@@ -1413,13 +1407,9 @@
           '">' +
           escapeHtml(item.label) +
           "</label>" +
-          (item.hint || item.bag
-            ? '<div class="item-meta">' +
-              renderBagBadge(item.bag) +
-              (item.hint ? '<span class="item-hint">' + escapeHtml(item.hint) + "</span>" : "") +
-              "</div>"
-            : "") +
+          (item.hint ? '<span class="item-hint">' + escapeHtml(item.hint) + "</span>" : "") +
           "</div>" +
+          renderBagBadge(item.bag, true) +
           deleteBtn +
           "</div>"
         );
@@ -1627,7 +1617,7 @@
           return;
         }
 
-        customs.push({ id: id, label: label });
+        customs.push({ id: id, label: label, bag: "checkin" });
         customMap[categoryId] = customs;
         saveCustom();
         renderAll();
