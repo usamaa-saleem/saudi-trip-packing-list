@@ -534,6 +534,44 @@
       text-decoration-color: color-mix(in srgb, var(--text-muted) 70%, transparent);
     }
 
+    .item.is-leaving {
+      animation: itemLeave 0.38s var(--ease) forwards;
+      pointer-events: none;
+    }
+
+    .item.is-entering {
+      animation: itemEnter 0.32s var(--ease);
+    }
+
+    @keyframes itemLeave {
+      0% {
+        opacity: 1;
+        transform: translateX(0);
+        max-height: 96px;
+      }
+      100% {
+        opacity: 0;
+        transform: translateX(14px);
+        max-height: 0;
+        margin-top: 0;
+        margin-bottom: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+        min-height: 0;
+      }
+    }
+
+    @keyframes itemEnter {
+      from {
+        opacity: 0;
+        transform: translateX(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
     .item.is-hidden { display: none; }
 
     /* Custom checkbox */
@@ -800,6 +838,14 @@
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
+      }
+      .item.is-leaving {
+        animation: none;
+        opacity: 0;
+        max-height: 0;
+        margin: 0;
+        padding: 0;
+        min-height: 0;
       }
     }
 
@@ -1238,7 +1284,7 @@
             section.open = false;
             return;
           }
-          var items = section.querySelectorAll(".item:not(.is-hidden)");
+          var items = section.querySelectorAll(visibleItemSelector());
           var hasRemaining = false;
           items.forEach(function (row) {
             if (!row.classList.contains("is-checked")) hasRemaining = true;
@@ -1373,6 +1419,65 @@
         return true;
       }
 
+      /** Visible item selector — excludes animating-out rows */
+      function visibleItemSelector() {
+        return ".item:not(.is-hidden):not(.is-leaving)";
+      }
+
+      function prefersReducedMotion() {
+        return window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      }
+
+      function refreshSectionVisibility(section) {
+        if (!section) return;
+        if (currentFilter === "all") {
+          section.style.display = "";
+          return;
+        }
+        var any = section.querySelector(visibleItemSelector());
+        section.style.display = any ? "" : "none";
+      }
+
+      function finishLeave(row) {
+        row.classList.remove("is-leaving");
+        row.classList.add("is-hidden");
+        refreshSectionVisibility(row.closest(".category"));
+        updateEmptyState();
+      }
+
+      /** Show or hide a row — animate when toggling a single item */
+      function setItemVisibility(row, show, animate) {
+        if (!row) return;
+        if (show) {
+          row.classList.remove("is-hidden", "is-leaving");
+          row.classList.add("is-entering");
+          row.addEventListener("animationend", function (e) {
+            if (e.animationName === "itemEnter") row.classList.remove("is-entering");
+          }, { once: true });
+          refreshSectionVisibility(row.closest(".category"));
+          updateEmptyState();
+          return;
+        }
+        if (row.classList.contains("is-hidden") || row.classList.contains("is-leaving")) return;
+        if (!animate || prefersReducedMotion()) {
+          row.classList.add("is-hidden");
+          refreshSectionVisibility(row.closest(".category"));
+          updateEmptyState();
+          return;
+        }
+        setTimeout(function () {
+          if (row.classList.contains("is-hidden")) return;
+          row.classList.add("is-leaving");
+          row.addEventListener("animationend", function (e) {
+            if (e.animationName !== "itemLeave") return;
+            finishLeave(row);
+          }, { once: true });
+          setTimeout(function () {
+            if (row.classList.contains("is-leaving")) finishLeave(row);
+          }, 480);
+        }, 120);
+      }
+
       // ----- Render -----
 
       function renderItem(item, isChecked) {
@@ -1486,7 +1591,7 @@
       }
 
       function updateEmptyState() {
-        var anyVisible = listEl.querySelector(".item:not(.is-hidden)");
+        var anyVisible = listEl.querySelector(visibleItemSelector());
         emptyFilter.classList.toggle("visible", !anyVisible && currentFilter !== "all");
       }
 
@@ -1575,17 +1680,10 @@
           var on = !!checkedMap[id];
           if (input) input.checked = on;
           row.classList.toggle("is-checked", on);
-          // Re-evaluate visibility under current filter
           var show = itemMatchesFilter(on);
-          row.classList.toggle("is-hidden", !show);
-          var section = row.closest(".category");
-          if (section && currentFilter !== "all") {
-            var any = section.querySelector(".item:not(.is-hidden)");
-            section.style.display = any ? "" : "none";
-          }
+          setItemVisibility(row, show, true);
         }
         updateProgress();
-        updateEmptyState();
       }
 
       /** Minimal CSS.escape polyfill for attribute selectors */
@@ -1724,9 +1822,8 @@
           saveChecked();
           row.classList.toggle("is-checked", input.checked);
           var show = itemMatchesFilter(input.checked);
-          row.classList.toggle("is-hidden", !show);
+          setItemVisibility(row, show, true);
           updateProgress();
-          updateEmptyState();
         }
       });
 
